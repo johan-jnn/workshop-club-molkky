@@ -1,5 +1,7 @@
 # Cahier des charges
 
+Site web d'une association du jeu de Morkkly.
+
 ## Besoins globaux (Must)
 
 ### M/Pages
@@ -43,3 +45,28 @@
 
 - <https://rqp-skateclub.fr/>
 - <https://www.facebook.com/CRHOM69/>
+
+---
+
+## Specification fonctionnelle
+
+### Rendre visible
+
+- Page d'accueil
+- Page à propos
+
+### Rassembler
+
+- Adhésion
+- Evénements
+
+### Promouvoir
+
+- Gallerie
+
+### Administrer
+
+- Gérer les adhérents
+- Gérer le contenu principal du site
+- Gérer les événements
+- Système de "rôles"
