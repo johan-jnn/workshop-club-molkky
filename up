@@ -1,3 +1,0 @@
-#!/bin/sh
-./sail up -d
-./sail run npm run dev -d
