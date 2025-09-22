@@ -57,12 +57,15 @@ Site web d'une association du jeu de Morkkly.
 
 ### Rassembler
 
-- Adhésion
+- Créer de l'adhésion
+  - Avec un système de license
 - Evénements
+  - Consulter, participer
 
 ### Promouvoir
 
 - Gallerie
+- Newsletter (_would_)
 
 ### Administrer
 
