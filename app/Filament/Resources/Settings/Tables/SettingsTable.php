@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Licenses\Tables;
+namespace App\Filament\Resources\Settings\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -8,29 +8,25 @@ use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class LicensesTable
+class SettingsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('name')
-                    ->label('Nom')
+                TextColumn::make('key')
+                    ->label('Clé')
                     ->searchable(),
-                TextColumn::make('period_limit')
-                    ->label('Période limite')
-                    ->dateTime()
-                    ->sortable(),
-                TextColumn::make('created_at')
-                    ->label('Date de création')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
+                TextColumn::make('label')
+                    ->label('Label')
+                    ->searchable(),
+                TextColumn::make('value')
+                    ->label('Valeur')
+                    ->searchable(),
+                TextColumn::make('updated_date')
                     ->label('Date de mise à jour')
                     ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable(),
             ])
             ->filters([
                 //
