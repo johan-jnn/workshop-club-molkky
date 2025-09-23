@@ -13,11 +13,11 @@ return new class extends Migration
   {
     Schema::create('events', function (Blueprint $table) {
       $table->id();
-      $table->string(column: 'title');
-      $table->text(column: 'description')->nullable();
+      $table->string('title');
+      $table->text('description')->nullable();
       $table->string('address');
-      $table->dateTime('start_time');
-      $table->dateTime('end_time');
+      $table->dateTime('date_start');
+      $table->dateTime('date_end');
       $table->integer('max_participants')->nullable();
       $table->integer('min_elo')->nullable();
       $table->integer('max_elo')->nullable();

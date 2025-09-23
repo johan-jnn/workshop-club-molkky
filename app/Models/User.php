@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-
 use App\Enums\Role;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -19,10 +20,8 @@ class User extends Authenticatable
    *
    * @var list<string>
    */
-  protected $casts = [
-    'role' => Role::class,
-  ];
   protected $fillable = [
+    'role',
     'first_name',
     'last_name',
     'email',
@@ -51,8 +50,35 @@ class User extends Authenticatable
   protected function casts(): array
   {
     return [
+      'role' => Role::class,
+      'birthdate' => 'date',
       'email_verified_at' => 'datetime',
       'password' => 'hashed',
+      'elo' => 'integer',
     ];
+  }
+
+  /**
+   * Get the reservations for the user.
+   */
+  public function reservations(): HasMany
+  {
+    return $this->hasMany(Reservation::class);
+  }
+
+  /**
+   * Get the adherent record for the user.
+   */
+  public function adherent(): HasOne
+  {
+    return $this->hasOne(Adherent::class);
+  }
+
+  /**
+   * Get the events that the user has reserved.
+   */
+  public function events(): HasManyThrough
+  {
+    return $this->hasManyThrough(Event::class, Reservation::class, 'user_id', 'id', 'id', 'event_id');
   }
 }
