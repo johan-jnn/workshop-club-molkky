@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class License extends Model
 {
-    protected $fillable = [
-        'name',
-        'description',
-        'price',
-        'duration_days',
-    ];
+  protected $fillable = [
+    'name',
+    'description',
+    'price',
+    'period_limit',
+  ];
 }
