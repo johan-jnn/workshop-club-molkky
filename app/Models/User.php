@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Enums\Role;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
@@ -10,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
   /** @use HasFactory<\Database\Factories\UserFactory> */
   use HasFactory, Notifiable;
@@ -80,5 +82,10 @@ class User extends Authenticatable
   public function events(): HasManyThrough
   {
     return $this->hasManyThrough(Event::class, Reservation::class, 'user_id', 'id', 'id', 'event_id');
+  }
+
+  public function canAccessPanel(Panel $panel): bool
+  {
+    return $this->role >= Role::CONTRIBUTOR;
   }
 }
