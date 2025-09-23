@@ -13,7 +13,7 @@ class LicensePolicy
    */
   public function viewAny(User $user): bool
   {
-    return $user->role >= Role::CONTRIBUTOR;
+    return $user->role->value >= Role::CONTRIBUTOR->value;
   }
 
   /**
@@ -21,7 +21,7 @@ class LicensePolicy
    */
   public function view(User $user, License $license): bool
   {
-    return $user->role >= Role::CONTRIBUTOR;
+    return $user->role->value >= Role::CONTRIBUTOR->value;
   }
 
   /**
@@ -29,7 +29,7 @@ class LicensePolicy
    */
   public function create(User $user): bool
   {
-    return $user->role >= Role::CONTRIBUTOR;
+    return $user->role->value >= Role::CONTRIBUTOR->value;
   }
 
   /**
@@ -37,7 +37,7 @@ class LicensePolicy
    */
   public function update(User $user, License $license): bool
   {
-    return $user->role >= Role::CONTRIBUTOR;
+    return $user->role->value >= Role::CONTRIBUTOR->value;
   }
 
   /**
@@ -45,7 +45,7 @@ class LicensePolicy
    */
   public function delete(User $user, License $license): bool
   {
-    return $user->role >= Role::CONTRIBUTOR;
+    return $user->role->value >= Role::CONTRIBUTOR->value;
   }
 
   /**
@@ -53,7 +53,7 @@ class LicensePolicy
    */
   public function restore(User $user, License $license): bool
   {
-    return $user->role >= Role::CONTRIBUTOR;
+    return $user->role->value >= Role::CONTRIBUTOR->value;
   }
 
   /**
@@ -61,6 +61,6 @@ class LicensePolicy
    */
   public function forceDelete(User $user, License $license): bool
   {
-    return $user->role >= Role::CONTRIBUTOR;
+    return $user->role->value >= Role::CONTRIBUTOR->value;
   }
 }

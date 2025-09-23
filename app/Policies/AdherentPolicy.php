@@ -13,7 +13,7 @@ class AdherentPolicy
    */
   public function viewAny(User $user): bool
   {
-    return $user->role >= Role::CONTRIBUTOR;
+    return $user->role->value >= Role::CONTRIBUTOR->value;
   }
 
   /**
@@ -21,7 +21,7 @@ class AdherentPolicy
    */
   public function view(User $user, Adherent $adherent): bool
   {
-    if ($user->role >= Role::CONTRIBUTOR) {
+    if ($user->role->value >= Role::CONTRIBUTOR->value) {
         return true;
     }
 
@@ -33,7 +33,7 @@ class AdherentPolicy
    */
   public function create(User $user): bool
   {
-    return $user->role >= Role::CONTRIBUTOR;
+    return $user->role->value >= Role::CONTRIBUTOR->value;
   }
 
   /**
@@ -41,7 +41,7 @@ class AdherentPolicy
    */
   public function update(User $user, Adherent $adherent): bool
   {
-    if ($user->role >= Role::CONTRIBUTOR) {
+    if ($user->role->value >= Role::CONTRIBUTOR->value) {
         return true;
     }
 
@@ -53,7 +53,7 @@ class AdherentPolicy
    */
   public function delete(User $user, Adherent $adherent): bool
   {
-    return $user->role >= Role::CONTRIBUTOR;
+    return $user->role->value >= Role::CONTRIBUTOR->value;
   }
 
   /**
@@ -61,7 +61,7 @@ class AdherentPolicy
    */
   public function restore(User $user, Adherent $adherent): bool
   {
-    return $user->role >= Role::CONTRIBUTOR;
+    return $user->role->value >= Role::CONTRIBUTOR->value;
   }
 
   /**
@@ -69,6 +69,6 @@ class AdherentPolicy
    */
   public function forceDelete(User $user, Adherent $adherent): bool
   {
-    return $user->role >= Role::CONTRIBUTOR;
+    return $user->role->value >= Role::CONTRIBUTOR->value;
   }
 }
