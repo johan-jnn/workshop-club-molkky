@@ -7,5 +7,5 @@ use Filament\Resources\Pages\CreateRecord;
 
 class CreateAdherent extends CreateRecord
 {
-    protected static string $resource = AdherentResource::class;
+  protected static string $resource = AdherentResource::class;
 }
