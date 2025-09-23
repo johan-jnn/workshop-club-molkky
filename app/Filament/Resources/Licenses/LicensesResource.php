@@ -8,14 +8,14 @@ use App\Filament\Resources\Licenses\Pages\ListLicenses;
 use App\Filament\Resources\Licenses\Schemas\LicenseForm;
 use App\Filament\Resources\Licenses\Tables\LicensesTable;
 use App\Models\License;
-use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use BackedEnum;
 use UnitEnum;
 
-class LicenseResource extends Resource
+class LicensesResource extends Resource
 {
     protected static ?string $model = License::class;
 
@@ -23,14 +23,13 @@ class LicenseResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'License';
 
-    // Même groupe que les adhérents
+    // Groupe
     protected static string|UnitEnum|null $navigationGroup = 'Adhérents';
-
-    // Nom du sous-onglet
-    protected static ?string $navigationLabel = 'Licences';
-
-    // Ordre dans le groupe (après Liste)
+    protected static ?string $navigationLabel = 'Liste des licenses';
     protected static ?int $navigationSort = 2;
+
+    protected static ?string $modelLabel = 'License';
+    protected static ?string $pluralModelLabel = 'Licenses';
 
     public static function form(Schema $schema): Schema
     {
