@@ -38,7 +38,7 @@ class Adherent extends Model
   /**
    * Get the license associated with the adherent.
    */
-  public function license(): BelongsTo≤
+  public function license(): BelongsTo
   {
     return $this->belongsTo(License::class);
   }
