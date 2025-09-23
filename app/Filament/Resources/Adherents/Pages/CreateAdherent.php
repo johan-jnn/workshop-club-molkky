@@ -2,10 +2,10 @@
 
 namespace App\Filament\Resources\Adherents\Pages;
 
-use App\Filament\Resources\Adherents\AdherentsResource;
+use App\Filament\Resources\Adherents\AdherentResource;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateAdherent extends CreateRecord
 {
-    protected static string $resource = AdherentsResource::class;
+  protected static string $resource = AdherentResource::class;
 }

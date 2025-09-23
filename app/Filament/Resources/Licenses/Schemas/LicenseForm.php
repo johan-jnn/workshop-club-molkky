@@ -14,13 +14,10 @@ class LicenseForm
         return $schema
             ->components([
                 TextInput::make('name')
-                    ->label('Nom')
                     ->required(),
                 Textarea::make('description')
-                    ->label('Description')
                     ->columnSpanFull(),
-                DateTimePicker::make('period_limit')
-                    ->label('Periode limite'),
+                DateTimePicker::make('period_limit'),
             ]);
     }
 }

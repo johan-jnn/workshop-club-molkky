@@ -15,22 +15,17 @@ class AdherentsTable
         return $table
             ->columns([
                 TextColumn::make('user.id')
-                    ->label('Identifiant utilisateur')
                     ->searchable(),
                 TextColumn::make('license.name')
-                    ->label('Nom de licence')
                     ->searchable(),
                 TextColumn::make('registration_date')
-                    ->label('Date d\'enregistrement')
                     ->dateTime()
                     ->sortable(),
                 TextColumn::make('created_at')
-                    ->label('Date de création')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
-                    ->label('Date de mise à jour')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
