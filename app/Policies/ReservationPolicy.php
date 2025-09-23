@@ -13,7 +13,7 @@ class ReservationPolicy
    */
   public function viewAny(User $user): bool
   {
-    return $user->role >= Role::CONTRIBUTOR;
+    return $user->role->value >= Role::CONTRIBUTOR->value ;
   }
 
   /**
@@ -21,7 +21,7 @@ class ReservationPolicy
    */
   public function view(User $user, Reservation $reservation): bool
   {
-    if ($user->role >= Role::CONTRIBUTOR) {
+    if ($user->role->value >= Role::CONTRIBUTOR->value ) {
         return true;
     }
 
@@ -33,7 +33,7 @@ class ReservationPolicy
    */
   public function create(User $user): bool
   {
-    return $user->role >= Role::CONTRIBUTOR;
+    return $user->role->value >= Role::CONTRIBUTOR->value ;
   }
 
   /**
@@ -41,7 +41,7 @@ class ReservationPolicy
    */
   public function update(User $user, Reservation $reservation): bool
   {
-    if ($user->role >= Role::CONTRIBUTOR) {
+    if ($user->role->value >= Role::CONTRIBUTOR->value ) {
         return true;
     }
 
@@ -53,7 +53,7 @@ class ReservationPolicy
    */
   public function delete(User $user, Reservation $reservation): bool
   {
-    if ($user->role >= Role::CONTRIBUTOR) {
+    if ($user->role->value >= Role::CONTRIBUTOR->value ) {
         return true;
     }
 
@@ -65,7 +65,7 @@ class ReservationPolicy
    */
   public function restore(User $user, Reservation $reservation): bool
   {
-    return $user->role >= Role::CONTRIBUTOR;
+    return $user->role->value >= Role::CONTRIBUTOR->value ;
   }
 
   /**
@@ -73,6 +73,6 @@ class ReservationPolicy
    */
   public function forceDelete(User $user, Reservation $reservation): bool
   {
-    return $user->role >= Role::CONTRIBUTOR;
+    return $user->role->value >= Role::CONTRIBUTOR->value ;
   }
 }
