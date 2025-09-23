@@ -13,38 +13,47 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class ReservationResource extends Resource
 {
-    protected static ?string $model = Reservation::class;
+  protected static ?string $model = Reservation::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+  protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $recordTitleAttribute = 'id';
+  protected static ?string $recordTitleAttribute = 'id';
 
-    public static function form(Schema $schema): Schema
-    {
-        return ReservationForm::configure($schema);
-    }
+  // Groupe principal
+  protected static string|UnitEnum|null $navigationGroup = 'Évenements';
 
-    public static function table(Table $table): Table
-    {
-        return ReservationsTable::configure($table);
-    }
+  protected static ?string $navigationLabel = 'Liste des réservations';
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
+  // Ordre dans le groupe
+  protected static ?int $navigationSort = 1;
 
-    public static function getPages(): array
-    {
-        return [
-            'index' => ListReservations::route('/'),
-            'create' => CreateReservation::route('/create'),
-            'edit' => EditReservation::route('/{record}/edit'),
-        ];
-    }
+  public static function form(Schema $schema): Schema
+  {
+    return ReservationForm::configure($schema);
+  }
+
+  public static function table(Table $table): Table
+  {
+    return ReservationsTable::configure($table);
+  }
+
+  public static function getRelations(): array
+  {
+    return [
+      //
+    ];
+  }
+
+  public static function getPages(): array
+  {
+    return [
+      'index' => ListReservations::route('/'),
+      'create' => CreateReservation::route('/create'),
+      'edit' => EditReservation::route('/{record}/edit'),
+    ];
+  }
 }

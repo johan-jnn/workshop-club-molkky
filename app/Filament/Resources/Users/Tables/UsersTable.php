@@ -17,25 +17,32 @@ class UsersTable
     return $table
       ->columns([
         TextColumn::make('role')
+          ->label('Rôle')
           ->badge(),
         TextColumn::make('first_name')
+          ->label('Prénom')
           ->searchable(),
         TextColumn::make('last_name')
+          ->label('Nom de famille')
           ->searchable(),
         TextColumn::make('email')
-          ->label('Email address')
+          ->label('Email')
           ->searchable(),
         TextColumn::make('birthdate')
+          ->label('Date de naissance')
           ->date()
           ->sortable(),
         TextColumn::make('elo')
+          ->label('Elo')
           ->numeric()
           ->sortable(),
         TextColumn::make('address')
+          ->label('Adresse')
           ->searchable(),
         TextColumn::make('email_verified_at')
           ->dateTime()
-          ->sortable(),
+          ->sortable()
+          ->toggleable(isToggledHiddenByDefault: true),
         TextColumn::make('created_at')
           ->dateTime()
           ->sortable()
