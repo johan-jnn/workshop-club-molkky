@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\Role;
 use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasName;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable implements FilamentUser
+class User extends Authenticatable implements FilamentUser, HasName
 {
   /** @use HasFactory<\Database\Factories\UserFactory> */
   use HasFactory, Notifiable;
@@ -91,6 +92,7 @@ class User extends Authenticatable implements FilamentUser
 
   public function getFilamentName(): string
   {
+
     return "{$this->first_name} {$this->last_name}";
   }
 
@@ -99,3 +101,4 @@ class User extends Authenticatable implements FilamentUser
     return trim("{$this->first_name} {$this->last_name}");
   }
 }
+
