@@ -16,7 +16,7 @@ return new class extends Migration
       $table->string('key')->unique();
       $table->string('label');
       $table->string('value');
-      $table->timestamp('updated_date');
+      $table->timestamp('updated_date')->useCurrent()->useCurrentOnUpdate();
     });
   }
 
