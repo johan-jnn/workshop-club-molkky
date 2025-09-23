@@ -18,6 +18,11 @@ class User extends Authenticatable implements FilamentUser, HasName
   /** @use HasFactory<\Database\Factories\UserFactory> */
   use HasFactory, Notifiable;
 
+  public function getFilamentName(): string
+  {
+    return "{$this->first_name} {$this->last_name}";
+  }
+
   /**
    * The attributes that are mass assignable.
    *
@@ -87,7 +92,7 @@ class User extends Authenticatable implements FilamentUser, HasName
 
   public function canAccessPanel(Panel $panel): bool
   {
-    return $this->role >= Role::CONTRIBUTOR;
+    return $this->role->value >= Role::CONTRIBUTOR->value;
   }
 
   public function getFilamentName(): string
