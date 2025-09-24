@@ -6,19 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Homepage extends Model
 {
-  protected $table = "homepage";
+    protected $table = 'homepage';
 
-  protected $fillable = [
-    "key",
-    "value"
-  ];
+    protected $fillable = [
+        'key',
+        'value',
+    ];
 
-  public $timestamps = false;
+    public $timestamps = false;
 
-  protected $primaryKey = "key";
-  protected $keyType = "string";
+    protected $primaryKey = 'key';
 
-  protected $attributes = [
-    "value" => ""
-  ];
+    protected $keyType = 'string';
+
+    protected $attributes = [
+        'value' => '',
+    ];
 }

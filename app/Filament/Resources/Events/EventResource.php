@@ -17,48 +17,45 @@ use UnitEnum;
 
 class EventResource extends Resource
 {
-  protected static ?string $model = Event::class;
+    protected static ?string $model = Event::class;
 
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::CalendarDays;
 
-  protected static string|BackedEnum|null $navigationIcon = Heroicon::CalendarDays;
+    protected static ?string $recordTitleAttribute = 'Évenements';
 
+    // Groupe principal
+    protected static string|UnitEnum|null $navigationGroup = 'Évenements';
 
-  protected static ?string $recordTitleAttribute = 'Évenements';
+    protected static ?string $navigationLabel = 'Liste des événements';
 
-  // Groupe principal
-  protected static string|UnitEnum|null $navigationGroup = 'Évenements';
+    protected static ?string $pluralModelLabel = 'Évenements';
 
-  protected static ?string $navigationLabel = 'Liste des événements';
+    // Ordre dans le groupe
+    protected static ?int $navigationSort = 1;
 
+    public static function form(Schema $schema): Schema
+    {
+        return EventForm::configure($schema);
+    }
 
-  protected static ?string $pluralModelLabel = 'Évenements';
+    public static function table(Table $table): Table
+    {
+        return EventsTable::configure($table);
+    }
 
-  // Ordre dans le groupe
-  protected static ?int $navigationSort = 1;
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
 
-  public static function form(Schema $schema): Schema
-  {
-    return EventForm::configure($schema);
-  }
-
-  public static function table(Table $table): Table
-  {
-    return EventsTable::configure($table);
-  }
-
-  public static function getRelations(): array
-  {
-    return [
-      //
-    ];
-  }
-
-  public static function getPages(): array
-  {
-    return [
-      'index' => ListEvents::route('/'),
-      'create' => CreateEvent::route('/create'),
-      'edit' => EditEvent::route('/{record}/edit'),
-    ];
-  }
+    public static function getPages(): array
+    {
+        return [
+            'index' => ListEvents::route('/'),
+            'create' => CreateEvent::route('/create'),
+            'edit' => EditEvent::route('/{record}/edit'),
+        ];
+    }
 }

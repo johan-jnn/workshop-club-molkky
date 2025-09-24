@@ -9,21 +9,20 @@ use Filament\Resources\Pages\EditRecord;
 
 class EditContactMessage extends EditRecord
 {
-  protected static string $resource = ContactMessageResource::class;
+    protected static string $resource = ContactMessageResource::class;
 
-
-  protected function getHeaderActions(): array
-  {
-    return [
-      DeleteAction::make()
-        ->successNotification(
-          Notification::make()
-            ->icon('heroicon-o-trash')
-            ->iconColor('danger')
-            ->success()
-            ->title('Message supprimé')
-            ->body('Le message a été supprimé avec succès.'),
-        )
-    ];
-  }
+    protected function getHeaderActions(): array
+    {
+        return [
+            DeleteAction::make()
+                ->successNotification(
+                    Notification::make()
+                        ->icon('heroicon-o-trash')
+                        ->iconColor('danger')
+                        ->success()
+                        ->title('Message supprimé')
+                        ->body('Le message a été supprimé avec succès.'),
+                ),
+        ];
+    }
 }

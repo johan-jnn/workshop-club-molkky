@@ -11,7 +11,7 @@ class UserFactoryTest extends TestCase
      */
     public function test_user_factory_creates_valid_user(): void
     {
-        $factory = new \Database\Factories\UserFactory();
+        $factory = new \Database\Factories\UserFactory;
         $userData = $factory->definition();
         $this->assertArrayHasKey('first_name', $userData);
         $this->assertArrayHasKey('email', $userData);
