@@ -15,11 +15,11 @@ class HomepageSeeder extends Seeder
   {
     \App\Models\Homepage::insert(
       Arr::map([
-        "hero.title",
-        "hero.description",
-        "hero.cover",
-        "events.title",
-        "events.cta_content",
+        "hero_title",
+        "hero_description",
+        "hero_cover",
+        "events_title",
+        "events_cta_content",
       ], fn($key) => ["key" => $key, "value" => ""])
     );
 
