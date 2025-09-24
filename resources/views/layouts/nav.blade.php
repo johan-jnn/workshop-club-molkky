@@ -25,4 +25,5 @@
         <a href="/about" class="font-body text-base font-bold {{ $navTextColor }} nav-underline hover:text-wood-light">À propos</a>
         {{-- <a href="/events" class="font-body text-base font-bold {{ $navTextColor }} nav-underline hover:text-wood-light">Événements</a> --}}
         <a href="/contact" class="font-body text-base font-bold {{ $navTextColor }} nav-underline hover:text-wood-light">Contact</a>
+        <a href="/admin" class="font-body text-base font-bold {{ $navTextColor }} nav-underline hover:text-wood-light">Dashboard</a>
 </nav>
