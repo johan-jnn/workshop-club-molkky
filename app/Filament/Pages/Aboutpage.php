@@ -16,7 +16,13 @@ class Aboutpage extends Page
 {
   protected string $view = 'filament.pages.aboutpage';
 
+  protected static ?string $title = 'A propos';
+
   protected static string|UnitEnum|null $navigationGroup = 'Pages';
+
+  protected static ?string $navigationLabel = 'A propos';
+
+  protected static ?int $navigationSort = 2;
 
   public array $data = [];
 
@@ -36,7 +42,7 @@ class Aboutpage extends Page
   {
     return $form
       ->schema([
-        Section::make('Héro-Header')->components([
+        Section::make('Hero')->components([
           TextInput::make('hero_title')
             ->label("Titre")
             ->required(),

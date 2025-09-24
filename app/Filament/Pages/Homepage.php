@@ -16,7 +16,13 @@ class Homepage extends Page
 {
     protected string $view = 'filament.pages.homepage';
 
+    protected static ?string $title = 'Page d\'accueil';
+
     protected static string|UnitEnum|null $navigationGroup = 'Pages';
+
+    protected static ?string $navigationLabel = 'Page d\'accueil';
+
+    protected static ?int $navigationSort = 1;
 
     public array $data = [];
 
@@ -36,7 +42,7 @@ class Homepage extends Page
     {
         return $form
             ->schema([
-                Section::make('Héro-Header')->components([
+                Section::make('Hero')->components([
                     TextInput::make('hero_title')
                         ->label('Titre')
                         ->required(),
