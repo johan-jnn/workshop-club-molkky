@@ -19,7 +19,9 @@ class ReservationResource extends Resource
 {
   protected static ?string $model = Reservation::class;
 
-  protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
+  protected static string|BackedEnum|null $navigationIcon = Heroicon::DocumentCheck;
+
 
   protected static ?string $recordTitleAttribute = 'id';
 
@@ -27,6 +29,9 @@ class ReservationResource extends Resource
   protected static string|UnitEnum|null $navigationGroup = 'Évenements';
 
   protected static ?string $navigationLabel = 'Liste des réservations';
+
+  protected static ?string $pluralModelLabel = 'Réservations';
+
 
   // Ordre dans le groupe
   protected static ?int $navigationSort = 1;

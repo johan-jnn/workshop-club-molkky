@@ -15,15 +15,17 @@ class EventForm
     return $schema
       ->components([
         TextInput::make('title')
+          ->label('Nom de l\'événement')
           ->required(),
         Textarea::make('description')
           ->rows(3)
           ->columnSpanFull()
           ->required(),
         TextInput::make('address')
+          ->label('Adresse')
           ->required(),
         TextInput::make('max_participants')
-          ->label('Max participants')
+          ->label('Max Participants')
           ->numeric(),
         TextInput::make('min_elo')
           ->label('Min ELO')
@@ -32,10 +34,10 @@ class EventForm
           ->label('Max ELO')
           ->numeric(),
         DateTimePicker::make('date_start')
-          ->label('Start date & time')
+          ->label('Date et heure de début')
           ->required(),
         DateTimePicker::make('date_end')
-          ->label('End date & time')
+          ->label('Date et heure de fin')
           ->required(),
 
 

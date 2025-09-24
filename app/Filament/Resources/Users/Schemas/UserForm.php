@@ -17,27 +17,35 @@ class UserForm
     return $schema
       ->components([
         Select::make('role')
+          ->label('Rôle')
           ->options(Role::class)
           ->required(),
         TextInput::make('first_name')
+          ->label('Prénom')
           ->required(),
         TextInput::make('last_name')
+          ->label('Nom')
           ->required(),
         TextInput::make('email')
-          ->label('Email address')
+          ->label('Email')
           ->email()
           ->required(),
         DatePicker::make('birthdate')
+          ->label('Date de naissance')
           ->required(),
         TextInput::make('elo')
+          ->label('ELO')
           ->numeric(),
         TextInput::make('phone_number')
+          ->label('Numéro de téléphone')
           ->tel()
           ->required()
           ->columnSpanFull(),
         TextInput::make('address')
+          ->label('Adresse')
           ->required(),
         TextInput::make('password')
+          ->label('Mot de passe')
           ->password()
           ->required(),
       ]);
