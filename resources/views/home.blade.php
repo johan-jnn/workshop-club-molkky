@@ -55,8 +55,7 @@
     <p class="text-base md:text-lg text-gray-700 mb-4 font-body" style="font-size: 15px;">{{ $reassuranceDesc }}</p>
       @include('layouts.cta-button')
     </div>
-  </div>
-</section>
+  </section>
 
 <section class="w-full pb-24 pt-8 px-30">
   <div class="container mx-auto px-8">
@@ -70,6 +69,5 @@
         </div>
       @endforeach
     </div>
-  </div>
-</section>
+  </section>
 @endsection

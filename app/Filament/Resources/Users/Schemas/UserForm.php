@@ -32,11 +32,11 @@ class UserForm
         TextInput::make('elo')
           ->numeric(),
         TextInput::make('phone_number')
+          ->tel()
           ->required()
           ->columnSpanFull(),
         TextInput::make('address')
           ->required(),
-        DateTimePicker::make('email_verified_at'),
         TextInput::make('password')
           ->password()
           ->required(),
