@@ -15,9 +15,21 @@ class ReservationsTable
   {
     return $table
       ->columns([
-        TextColumn::make('id')->label('ID')->sortable(),
-        TextColumn::make('user.first_name')->label('First Name')->searchable()->sortable(),
-        TextColumn::make('user.last_name')->label('Last Name')->searchable()->sortable(),
+        TextColumn::make('id')
+          ->label('ID')
+          ->sortable(),
+        TextColumn::make('user.first_name')
+          ->label('Prénom')
+          ->searchable()
+          ->sortable(),
+        TextColumn::make('user.last_name')
+          ->label('Nom')
+          ->searchable()
+          ->sortable(),
+        TextColumn::make('event.title')
+          ->label('Événement')
+          ->searchable()
+          ->sortable(),
       ])
       ->filters([
         //
