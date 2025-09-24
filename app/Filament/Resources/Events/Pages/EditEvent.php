@@ -25,8 +25,10 @@ class EditEvent extends EditRecord
       DeleteAction::make()
         ->successNotification(
           Notification::make()
+            ->icon('heroicon-o-trash')
+            ->iconColor('danger')
             ->success()
-            ->title('Événement supprimé')
+            ->title('Évenement supprimé')
             ->body('L\'événement a été supprimé avec succès.'),
         )
     ];
