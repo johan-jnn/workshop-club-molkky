@@ -2,29 +2,27 @@
 
 
 @php
-  $heroTitle ??= 'Titre principal de la page';
-  $heroDesc ??=
-      "Petite description d'accroche pour présenter le club, ses valeurs ou son ambiance et ses principales valeurs.";
-  $reassuranceTitle ??= 'Titre de réassurance pour la section';
-  $reassuranceDesc ??=
-      "Un texte rassurant sur l'ambiance, la convivialité, l'encadrement, etc. du club. Ansi que la totalité des activités réalisées par le club tout au long de l'année, nous pouvons savoir quels sont les objectifs du club aussi au niveau compétition et ainsi de suite.";
-  $eventsTitle ??= 'Nos prochains événements';
+  $heroTitle = $heroTitle ?? 'Club de Mölkky CRHOM – Convivialité & Précision';
+  $heroDesc = $heroDesc ?? "Rejoignez notre club pour découvrir, pratiquer et partager le plaisir du mölkky dans une ambiance amicale et familiale. Tournois, entraînements et rencontres tout au long de l’année !";
+  $reassuranceTitle = $reassuranceTitle ?? 'Un club fait pour tous';
+  $reassuranceDesc = $reassuranceDesc ?? "Que vous soyez débutant curieux ou joueur confirmé, notre club vous accueille dans un esprit de partage, de convivialité et de fair-play. Ici, chacun trouve sa place et progresse à son rythme.";
+  $eventsTitle = $eventsTitle ?? 'Nos prochains événements';
   $events = $events ?? [
-      [
-          'img' => '/images/event1.jpg',
-          'title' => 'Titre événement 1',
-          'desc' => "Courte description de l'événement à venir. Informations principales, date, lieu, etc.",
-      ],
-      [
-          'img' => '/images/event2.jpg',
-          'title' => 'Titre événement 2',
-          'desc' => "Courte description de l'événement à venir. Informations principales, date, lieu, etc.",
-      ],
-      [
-          'img' => '/images/event3.jpg',
-          'title' => 'Titre événement 3',
-          'desc' => "Courte description de l'événement à venir. Informations principales, date, lieu, etc.",
-      ],
+    [
+      'img' => '/images/event1.jpg',
+      'title' => 'Tournoi du Rhône 2024',
+      'desc' => "Notre équipe a remporté le tournoi du Rhône lors de l'édition de 2024"
+    ],
+    [
+      'img' => '/images/event2.jpg',
+      'title' => 'Inauguration du nouveau terrain',
+      'desc' => "Nous avons eu l'honneur d'inaugurer notre nouveau terrain de mölkky en présence des élus locaux."
+    ],
+    [
+      'img' => '/images/event3.jpg',
+      'title' => 'Soiree conviviale de fin d\'année',
+      'desc' => "Nous vous invitons à notre soirée conviviale de fin d'année pour célébrer ensemble les réussites de l'année écoulée."
+    ],
   ];
 @endphp
 
@@ -34,47 +32,42 @@
 @endsection
 
 @section('content')
-  <section class="w-full py-16">
-    <div class="container mx-auto flex flex-col md:flex-row items-center gap-12 px-8">
-      <div class="flex-1 flex flex-col items-start justify-center gap-6">
-        <h1 class="text-3xl md:text-4xl font-bold mb-2 font-heading">{{ $heroTitle }}</h1>
-        <p class="text-base md:text-lg text-gray-700 mb-4 font-body" style="font-size: 16px;">{{ $heroDesc }}</p>
-        @include('layouts.cta-button')
-      </div>
-      <div class="flex-1 flex justify-center">
-        <img src="/images/hero-img.jpg" alt="Mölkky Hero" class="max-w-xs md:max-w-md rounded-lg shadow-lg object-cover">
-      </div>
+<section class="w-full py-16 px-30">
+  <div class="container mx-auto flex flex-col md:flex-row items-center gap-12 px-8">
+    <div class="flex-1 flex flex-col items-start justify-center gap-6">
+  <h1 class="text-3xl md:text-4xl font-bold mb-2 font-heading">{{ $heroTitle }}</h1>
+    <p class="text-base md:text-lg text-gray-700 mb-4 font-body" style="font-size: 15px;">{{ $heroDesc }}</p>
+      @include('layouts.cta-button')
+    </div>
+    <div class="flex-1 flex justify-center">
+  <img src="/images/hero-img.jpg" alt="Mölkky Hero" class="max-w-xs md:max-w-md rounded-lg shadow-lg object-cover transition-transform duration-300 ease-in-out hover:scale-105">
+    </div>
+  </div>
+</section>
+
+<section class="w-full pb-16 pt-16 px-30">
+  <div class="container mx-auto flex flex-col md:flex-row items-center gap-12 px-8">
+    <div class="flex-1 flex justify-center mb-8 md:mb-0">
+  <img src="/images/club-img.jpg" alt="Ambiance club" class="max-w-xs md:max-w-md rounded-lg shadow-lg object-cover transition-transform duration-300 ease-in-out hover:scale-105">
+    </div>
+    <div class="flex-1 flex flex-col items-start justify-center gap-6">
+  <h3 class="text-3xl md:text-3xl font-bold mb-2 font-heading">{{ $reassuranceTitle }}</h3>
+    <p class="text-base md:text-lg text-gray-700 mb-4 font-body" style="font-size: 15px;">{{ $reassuranceDesc }}</p>
+      @include('layouts.cta-button')
     </div>
   </section>
 
-  <hr class="border-wood-light my-16 w-3/4 mx-auto" />
-
-  <section class="w-full pb-16">
-    <div class="container mx-auto flex flex-col md:flex-row items-center gap-12 px-8">
-      <div class="flex-1 flex justify-center mb-8 md:mb-0">
-        <img src="/images/club-img.jpg" alt="Ambiance club"
-          class="max-w-xs md:max-w-md rounded-lg shadow-lg object-cover">
-      </div>
-      <div class="flex-1 flex flex-col items-start justify-center gap-6">
-        <h3 class="text-2xl md:text-3xl font-bold mb-2 font-heading">{{ $reassuranceTitle }}</h3>
-        <p class="text-base md:text-lg text-gray-700 mb-4 font-body" style="font-size: 16px;">{{ $reassuranceDesc }}</p>
-        @include('layouts.cta-button')
-      </div>
-    </div>
-  </section>
-
-  <section class="w-full pb-24 pt-8">
-    <div class="container mx-auto px-8">
-      <h2 class="text-3xl md:text-4xl font-bold mb-10 text-center font-heading">{{ $eventsTitle }}</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        @foreach ($events as $event)
-          <div class="bg-white rounded-lg shadow-md flex flex-col items-center p-6">
-            <img src="{{ $event['img'] }}" alt="{{ $event['title'] }}" class="w-full h-40 object-cover rounded-md mb-4">
-            <h4 class="text-xl font-semibold mb-2 font-heading">{{ $event['title'] }}</h4>
-            <p class="text-gray-700 text-center font-body" style="font-size: 16px;">{{ $event['desc'] }}</p>
-          </div>
-        @endforeach
-      </div>
+<section class="w-full pb-24 pt-8 px-30">
+  <div class="container mx-auto px-8">
+  <h2 class="text-3xl md:text-4xl font-bold mb-15 text-center font-heading">{{ $eventsTitle }}</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      @foreach ($events as $event)
+        <div class="bg-white rounded-lg shadow-md flex flex-col items-center pb-6">
+          <img src="{{ $event['img'] }}" alt="{{ $event['title'] }}" class="w-200 h-40 object-cover rounded-md mb-4 transition-transform duration-300 ease-in-out hover:scale-105">
+    <h4 class="text-xl font-semibold mb-2 font-heading">{{ $event['title'] }}</h4>
+      <p class="text-gray-700 text-center font-body" style="font-size: 14px;">{{ $event['desc'] }}</p>
+        </div>
+      @endforeach
     </div>
   </section>
 @endsection
