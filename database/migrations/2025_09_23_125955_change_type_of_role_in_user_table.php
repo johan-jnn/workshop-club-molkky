@@ -22,8 +22,8 @@ return new class extends Migration
    */
   public function down(): void
   {
-    Schema::table('user', function (Blueprint $table) {
-      $table->enum('role', ['0', '1', '2'])->default('0')->change();
+    Schema::table('users', function (Blueprint $table) {
+      $table->enum('role', Role::cases())->default(Role::USER)->change();
     });
   }
 };

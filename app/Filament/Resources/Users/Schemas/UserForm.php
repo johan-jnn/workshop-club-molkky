@@ -38,6 +38,7 @@ class UserForm
           ->numeric(),
         TextInput::make('phone_number')
           ->label('Numéro de téléphone')
+          ->tel()
           ->required()
           ->columnSpanFull(),
         TextInput::make('address')

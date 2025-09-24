@@ -18,7 +18,12 @@ class UsersTable
       ->columns([
         TextColumn::make('role')
           ->label('Rôle')
-          ->badge(),
+          ->badge()
+          ->formatStateUsing(fn (Role $state): string => match($state) {
+              Role::USER => 'Utilisateur',
+              Role::CONTRIBUTOR => 'Contributeur',
+              Role::ADMINISTRATOR => 'Administrateur',
+          }),
         TextColumn::make('first_name')
           ->label('Prénom')
           ->searchable(),
