@@ -95,12 +95,6 @@ class User extends Authenticatable implements FilamentUser, HasName
     return $this->role->value >= Role::CONTRIBUTOR->value;
   }
 
-  public function getFilamentName(): string
-  {
-
-    return "{$this->first_name} {$this->last_name}";
-  }
-
   public function getNameAttribute(): string
   {
     return trim("{$this->first_name} {$this->last_name}");
