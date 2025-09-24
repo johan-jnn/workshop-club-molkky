@@ -18,7 +18,7 @@ class Event extends Model
     'min_elo',
     'max_elo',
   ];
-  
+
   /**
    * Get the attributes that should be cast.
    *

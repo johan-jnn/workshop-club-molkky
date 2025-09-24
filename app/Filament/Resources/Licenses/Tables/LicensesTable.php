@@ -15,19 +15,15 @@ class LicensesTable
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->label('Nom')
                     ->searchable(),
                 TextColumn::make('period_limit')
-                    ->label('Période limite')
                     ->dateTime()
                     ->sortable(),
                 TextColumn::make('created_at')
-                    ->label('Date de création')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
-                    ->label('Date de mise à jour')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
