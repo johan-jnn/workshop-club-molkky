@@ -2,16 +2,12 @@
 
 namespace App\Filament\Pages;
 
-use Arr;
-use Filament\Actions\Action;
-use Filament\Actions\ActionGroup;
-use Filament\Actions\CreateAction;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\FileUpload;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
-use Filament\Schemas\Components\Actions;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use UnitEnum;
@@ -24,11 +20,13 @@ class Homepage extends Page
 
   public array $data = [];
 
-
   public function mount(): void
   {
     $data = \App\Models\Homepage::all()->pluck("value", "key")->toArray();
+
     $data["sections"] = json_decode($data["sections"] ?? "[]", true);
+    $data["events"] = json_decode($data["events"] ?? "[]", true);
+    
     $this->form->fill(
       $data
     );
@@ -44,7 +42,14 @@ class Homepage extends Page
             ->required(),
           RichEditor::make('hero_description')
             ->required()
-            ->label("Description")
+            ->label("Description"),
+          FileUpload::make('hero_image')
+            ->label("Image")
+            ->image()
+            ->directory('events')
+            ->disk('public')
+            ->visibility('public')
+            ->required(),
         ]),
         Section::make('Sections')
           ->components(
@@ -58,16 +63,46 @@ class Homepage extends Page
                     ->required(),
                   RichEditor::make('description')
                     ->label("Description")
-                    ->required()
+                    ->required(),
+                  FileUpload::make('image')
+                    ->label("Image")
+                    ->image()
+                    ->directory('events')
+                    ->disk('public')
+                    ->visibility('public')
+                    ->required(),
                 ])
                 ->minItems(1)
             ]
           ),
-        Section::make('Autres')
+        Section::make('Événements')
           ->components([
             TextInput::make('events_title')
-              ->label("Titre introduisant les événements")
-              ->required()
+              ->label("Titre de la section événements")
+              ->required(),
+            Repeater::make('events')
+              ->hiddenLabel()
+              ->label("Événements")
+              ->components([
+                FileUpload::make('image')
+                  ->label("Image")
+                  ->image()
+                  ->directory('events')
+                  ->disk('public')
+                  ->visibility('public')
+                  ->required(),
+                TextInput::make('title')
+                  ->label("Titre")
+                  ->required(),
+                RichEditor::make('description')
+                  ->label("Description")
+                  ->required()
+              ])
+              ->minItems(1)
+              ->maxItems(3)
+              ->addActionLabel('Ajouter un événement')
+              ->reorderableWithButtons()
+              ->collapsible()
           ])
       ])
       ->statePath('data');
@@ -77,14 +112,20 @@ class Homepage extends Page
   {
     $data = $this->form->getState();
     $data["sections"] = json_encode($data["sections"]);
+    $data["events"] = json_encode($data["events"]);
 
-    $updated = \App\Models\Homepage::upsert(
-      Arr::map($data, fn($value, $key) => ["key" => $key, "value" => $value]),
-      "key"
-    );
+    $updated = 0;
+
+    foreach ($data as $key => $value) {
+      \App\Models\Homepage::updateOrCreate(
+        ['key' => $key],
+        ['value' => $value]
+      );
+      $updated++;
+    }
 
     Notification::make()
-      ->title("$updated / " . count($data) . " modifications apportés.")
+      ->title("$updated / " . count($data) . " modifications apportées.")
       ->success()
       ->send();
   }
