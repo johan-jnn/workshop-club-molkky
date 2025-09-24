@@ -3,7 +3,7 @@
 namespace App\Filament\Pages;
 
 use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\TextArea;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
 use Filament\Notifications\Notification;
@@ -40,7 +40,7 @@ class Homepage extends Page
           TextInput::make('hero_title')
             ->label("Titre")
             ->required(),
-          TextArea::make('hero_description')
+          RichEditor::make('hero_description')
             ->required()
             ->label("Description"),
           FileUpload::make('hero_image')
@@ -61,7 +61,7 @@ class Homepage extends Page
                   TextInput::make('title')
                     ->label("Titre")
                     ->required(),
-                  TextArea::make('description')
+                  RichEditor::make('description')
                     ->label("Description")
                     ->required(),
                   FileUpload::make('image')
@@ -94,7 +94,7 @@ class Homepage extends Page
                 TextInput::make('title')
                   ->label("Titre")
                   ->required(),
-                TextArea::make('description')
+                RichEditor::make('description')
                   ->label("Description")
                   ->required()
               ])
@@ -116,7 +116,6 @@ class Homepage extends Page
 
     $updated = 0;
 
-    // Utilisation d'updateOrCreate pour chaque clé
     foreach ($data as $key => $value) {
       \App\Models\Homepage::updateOrCreate(
         ['key' => $key],
