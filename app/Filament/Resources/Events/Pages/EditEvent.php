@@ -4,16 +4,31 @@ namespace App\Filament\Resources\Events\Pages;
 
 use App\Filament\Resources\Events\EventResource;
 use Filament\Actions\DeleteAction;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
 
 class EditEvent extends EditRecord
 {
-    protected static string $resource = EventResource::class;
+  protected static string $resource = EventResource::class;
 
-    protected function getHeaderActions(): array
-    {
-        return [
-            DeleteAction::make(),
-        ];
-    }
+  protected function getSavedNotification(): ?Notification
+  {
+    return Notification::make()
+      ->success()
+      ->title('Événement sauvegardé')
+      ->body('L\'événement a été mis à jour avec succès.');
+  }
+
+  protected function getHeaderActions(): array
+  {
+    return [
+      DeleteAction::make()
+        ->successNotification(
+          Notification::make()
+            ->success()
+            ->title('Événement supprimé')
+            ->body('L\'événement a été supprimé avec succès.'),
+        )
+    ];
+  }
 }

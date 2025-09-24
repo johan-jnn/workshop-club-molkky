@@ -17,43 +17,45 @@ use UnitEnum;
 
 class LicensesResource extends Resource
 {
-    protected static ?string $model = License::class;
+  protected static ?string $model = License::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $recordTitleAttribute = 'License';
+  protected static string|BackedEnum|null $navigationIcon = Heroicon::DocumentText;
 
-    // Groupe
-    protected static string|UnitEnum|null $navigationGroup = 'Adhérents';
-    protected static ?string $navigationLabel = 'Liste des licenses';
-    protected static ?int $navigationSort = 2;
 
-    protected static ?string $modelLabel = 'License';
-    protected static ?string $pluralModelLabel = 'Licenses';
+  protected static ?string $recordTitleAttribute = 'License';
 
-    public static function form(Schema $schema): Schema
-    {
-        return LicenseForm::configure($schema);
-    }
+  // Groupe
+  protected static string|UnitEnum|null $navigationGroup = 'Adhérents';
+  protected static ?string $navigationLabel = 'Liste des licenses';
+  protected static ?int $navigationSort = 2;
 
-    public static function table(Table $table): Table
-    {
-        return LicensesTable::configure($table);
-    }
+  protected static ?string $modelLabel = 'License';
+  protected static ?string $pluralModelLabel = 'Licenses';
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
+  public static function form(Schema $schema): Schema
+  {
+    return LicenseForm::configure($schema);
+  }
 
-    public static function getPages(): array
-    {
-        return [
-            'index' => ListLicenses::route('/'),
-            'create' => CreateLicense::route('/create'),
-            'edit' => EditLicense::route('/{record}/edit'),
-        ];
-    }
+  public static function table(Table $table): Table
+  {
+    return LicensesTable::configure($table);
+  }
+
+  public static function getRelations(): array
+  {
+    return [
+      //
+    ];
+  }
+
+  public static function getPages(): array
+  {
+    return [
+      'index' => ListLicenses::route('/'),
+      'create' => CreateLicense::route('/create'),
+      'edit' => EditLicense::route('/{record}/edit'),
+    ];
+  }
 }

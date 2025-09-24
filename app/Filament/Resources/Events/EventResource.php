@@ -19,14 +19,19 @@ class EventResource extends Resource
 {
   protected static ?string $model = Event::class;
 
-  protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-  protected static ?string $recordTitleAttribute = 'title';
+  protected static string|BackedEnum|null $navigationIcon = Heroicon::CalendarDays;
+
+
+  protected static ?string $recordTitleAttribute = 'Évenements';
 
   // Groupe principal
   protected static string|UnitEnum|null $navigationGroup = 'Évenements';
 
   protected static ?string $navigationLabel = 'Liste des événements';
+
+
+  protected static ?string $pluralModelLabel = 'Évenements';
 
   // Ordre dans le groupe
   protected static ?int $navigationSort = 1;
