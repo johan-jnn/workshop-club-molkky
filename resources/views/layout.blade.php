@@ -11,7 +11,7 @@
 </head>
 <body>
     @include('layouts.header')
-    <main class="flex-1 px-30">
+    <main class="flex-1">
         @yield('content')
     </main>
     @include('layouts.footer')
