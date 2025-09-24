@@ -28,7 +28,7 @@ class Homepage extends Page
   public function mount(): void
   {
     $data = \App\Models\Homepage::all()->pluck("value", "key")->toArray();
-    $data["sections"] = json_decode($data["sections"], true);
+    $data["sections"] = json_decode($data["sections"] ?? "[]", true);
     $this->form->fill(
       $data
     );
