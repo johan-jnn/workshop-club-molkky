@@ -27,6 +27,16 @@ class AdminPanelProvider extends PanelProvider
       ->default()
       ->id('admin')
       ->path('admin')
+      ->errorNotifications(true)
+      ->registerErrorNotification(
+        title: 'Une erreur est survenue',
+        body: 'Merci de réessayer plus tard.',
+      )
+      ->registerErrorNotification(
+        title: 'Enregistrement introuvable',
+        body: 'L’utilisateur demandé n’existe pas.',
+        statusCode: 404,
+      )
       ->login()
       ->colors([
         'primary' => Color::Amber,

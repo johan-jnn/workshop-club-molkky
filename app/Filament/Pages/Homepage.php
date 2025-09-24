@@ -26,7 +26,7 @@ class Homepage extends Page
 
     $data["sections"] = json_decode($data["sections"] ?? "[]", true);
     $data["events"] = json_decode($data["events"] ?? "[]", true);
-
+    
     $this->form->fill(
       $data
     );
