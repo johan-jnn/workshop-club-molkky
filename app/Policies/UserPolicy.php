@@ -44,7 +44,7 @@ class UserPolicy
    */
   public function updateRole(User $user, User $model): bool
   {
-    return $user->role->value >= Role::ADMINISTRATOR;
+    return $user->role->value >= Role::ADMINISTRATOR->value;
   }
 
   /**
@@ -52,7 +52,7 @@ class UserPolicy
    */
   public function updatePassword(User $user, User $model): bool
   {
-    return $user->id == $model->id || $user->role->value >= Role::ADMINISTRATOR;
+    return $user->id == $model->id || $user->role->value >= Role::ADMINISTRATOR->value;
   }
 
   /**
