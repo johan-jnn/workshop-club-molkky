@@ -9,32 +9,30 @@ use Filament\Resources\Pages\EditRecord;
 
 class EditUser extends EditRecord
 {
-  protected static string $resource = UserResource::class;
+    protected static string $resource = UserResource::class;
 
-
-
-  protected function getSavedNotification(): ?Notification
-  {
-    return Notification::make()
-      ->success()
-      ->title('Utilisateur sauvegardé')
-      ->body('L\'utilisateur a été mis à jour avec succès.')
-      ->icon('heroicon-o-check-circle')
-      ->iconColor('success');
-  }
-
-  protected function getHeaderActions(): array
-  {
-    return [
-      DeleteAction::make()
-        ->successNotification(
-          Notification::make()
-            ->icon('heroicon-o-trash')
-            ->iconColor('danger')
+    protected function getSavedNotification(): ?Notification
+    {
+        return Notification::make()
             ->success()
-            ->title('Utilisateur supprimé')
-            ->body('L\'utilisateur a été supprimé avec succès.'),
-        )
-    ];
-  }
+            ->title('Utilisateur sauvegardé')
+            ->body('L\'utilisateur a été mis à jour avec succès.')
+            ->icon('heroicon-o-check-circle')
+            ->iconColor('success');
+    }
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            DeleteAction::make()
+                ->successNotification(
+                    Notification::make()
+                        ->icon('heroicon-o-trash')
+                        ->iconColor('danger')
+                        ->success()
+                        ->title('Utilisateur supprimé')
+                        ->body('L\'utilisateur a été supprimé avec succès.'),
+                ),
+        ];
+    }
 }

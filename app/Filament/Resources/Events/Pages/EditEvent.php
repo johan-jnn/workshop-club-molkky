@@ -9,26 +9,28 @@ use Filament\Resources\Pages\EditRecord;
 
 class EditEvent extends EditRecord
 {
-  protected static string $resource = EventResource::class;
+    protected static string $resource = EventResource::class;
 
-  protected function getSavedNotification(): ?Notification
-  {
-    return Notification::make()
-      ->success()
-      ->title('Événement sauvegardé')
-      ->body('L\'événement a été mis à jour avec succès.');
-  }
-
-  protected function getHeaderActions(): array
-  {
-    return [
-      DeleteAction::make()
-        ->successNotification(
-          Notification::make()
+    protected function getSavedNotification(): ?Notification
+    {
+        return Notification::make()
             ->success()
-            ->title('Événement supprimé')
-            ->body('L\'événement a été supprimé avec succès.'),
-        )
-    ];
-  }
+            ->title('Événement sauvegardé')
+            ->body('L\'événement a été mis à jour avec succès.');
+    }
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            DeleteAction::make()
+                ->successNotification(
+                    Notification::make()
+                        ->icon('heroicon-o-trash')
+                        ->iconColor('danger')
+                        ->success()
+                        ->title('Évenement supprimé')
+                        ->body('L\'événement a été supprimé avec succès.'),
+                ),
+        ];
+    }
 }

@@ -8,27 +8,27 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-  /**
-   * Run the migrations.
-   */
-  public function up(): void
-  {
-    Schema::create('adherents', function (Blueprint $table) {
-      $table->id();
-      $table->foreignIdFor(User::class)->constrained()->onDelete('cascade');
-      $table->foreignIdFor(License::class)->constrained()->onDelete('cascade');
-      $table->dateTime('registration_date');
-      $table->timestamps();
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('adherents', function (Blueprint $table) {
+            $table->id();
+            $table->foreignIdFor(User::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(License::class)->constrained()->onDelete('cascade');
+            $table->dateTime('registration_date');
+            $table->timestamps();
 
-      $table->unique(['user_id', 'license_id']);
-    });
-  }
+            $table->unique(['user_id', 'license_id']);
+        });
+    }
 
-  /**
-   * Reverse the migrations.
-   */
-  public function down(): void
-  {
-    Schema::dropIfExists('adherents');
-  }
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('adherents');
+    }
 };

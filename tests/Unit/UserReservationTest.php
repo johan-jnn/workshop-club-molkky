@@ -11,7 +11,7 @@ class UserReservationTest extends TestCase
      */
     public function test_user_has_reservations_relation(): void
     {
-        $user = new \App\Models\User();
+        $user = new \App\Models\User;
         $this->assertTrue(method_exists($user, 'reservations'));
     }
 }
