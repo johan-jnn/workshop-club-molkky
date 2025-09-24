@@ -61,7 +61,7 @@ class User extends Authenticatable implements FilamentUser, HasName
     ];
   }
 
-  /**
+    /**
    * Get the reservations for the user.
    */
   public function reservations(): HasMany
