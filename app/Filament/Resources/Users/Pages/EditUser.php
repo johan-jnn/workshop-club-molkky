@@ -25,6 +25,7 @@ class EditUser extends EditRecord
     {
         return [
             DeleteAction::make()
+                ->label('Supprimer l\'utilisateur')
                 ->successNotification(
                     Notification::make()
                         ->icon('heroicon-o-trash')

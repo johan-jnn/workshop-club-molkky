@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Licenses\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
@@ -34,11 +35,16 @@ class LicensesTable
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                EditAction::make()
+                    ->label('Modifier'),
+                DeleteAction::make()
+                    ->label('Supprimer')
+                    ->successNotificationTitle('Licence supprimée'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()
+                        ->label('Supprimer les licences sélectionnées'),
                 ]),
             ]);
     }

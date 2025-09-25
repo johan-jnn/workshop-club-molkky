@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Reservations\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
@@ -34,11 +35,16 @@ class ReservationsTable
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                EditAction::make()
+                    ->label('Modifier la réservation'),
+                DeleteAction::make()
+                    ->label('Supprimer la réservation')
+                    ->successNotificationTitle('Réservation supprimée'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()
+                        ->label('Supprimer les réservations sélectionnées'),
                 ]),
             ]);
     }
