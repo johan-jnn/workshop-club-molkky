@@ -15,6 +15,7 @@ class EditContactMessage extends EditRecord
     {
         return [
             DeleteAction::make()
+                ->label('Supprimer le message')
                 ->successNotification(
                     Notification::make()
                         ->icon('heroicon-o-trash')

@@ -92,11 +92,11 @@
         </div>
         <div class="flex-1 flex flex-col items-start justify-center gap-5">
           <h3 class="text-3xl md:text-3xl font-bold mb-2 font-heading">{{ $section['title'] }}</h3>
-          <p class="text-base md:text-lg text-gray-700 mb-4 font-body" style="font-size: 15px;">
-            {!! $section['description'] !!}</p>
+          <div class="text-base md:text-lg text-gray-700 mb-4 font-body" style="font-size: 15px;">
+            {!! $section['description'] !!}
+          </div>
           @include('layouts.cta-button')
         </div>
-      </div>
     @endforeach
   </section>
 

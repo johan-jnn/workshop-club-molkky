@@ -23,6 +23,7 @@ class EditEvent extends EditRecord
     {
         return [
             DeleteAction::make()
+                ->label('Supprimer l\'événement')
                 ->successNotification(
                     Notification::make()
                         ->icon('heroicon-o-trash')

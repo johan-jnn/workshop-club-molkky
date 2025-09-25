@@ -6,19 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Aboutpage extends Model
 {
-  protected $table = "aboutpage";
+    protected $table = 'aboutpage';
 
-  protected $fillable = [
-    "key",
-    "value"
-  ];
+    protected $fillable = [
+        'key',
+        'value',
+    ];
 
-  public $timestamps = false;
+    public $timestamps = false;
 
-  protected $primaryKey = "key";
-  protected $keyType = "string";
+    protected $primaryKey = 'key';
 
-  protected $attributes = [
-    "value" => ""
-  ];
+    protected $keyType = 'string';
+
+    protected $attributes = [
+        'value' => '',
+    ];
 }

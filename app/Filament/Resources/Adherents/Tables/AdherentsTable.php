@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Adherents\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
@@ -41,11 +42,16 @@ class AdherentsTable
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                EditAction::make()
+                    ->label('Modifier'),
+                DeleteAction::make()
+                    ->label('Supprimer')
+                    ->successNotificationTitle('Adhérent supprimé'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()
+                        ->label('Supprimer les adhérents sélectionnés'),
                 ]),
             ]);
     }

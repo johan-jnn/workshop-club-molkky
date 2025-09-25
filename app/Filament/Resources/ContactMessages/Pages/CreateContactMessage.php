@@ -16,7 +16,7 @@ class CreateContactMessage extends CreateRecord
             ->icon('heroicon-o-check-circle')
             ->iconColor('success')
             ->success()
-            ->title('Événement créé')
-            ->body("L'événement a été enregistré avec succès.");
+            ->title('Message créé')
+            ->body('Le message a été enregistré avec succès.');
     }
 }
