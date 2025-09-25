@@ -20,9 +20,27 @@
   $sectionsData = Homepage::find('sections')->value ?? '[]';
   $sections = json_decode($sectionsData, true) ?? [];
 
+  if (empty($sections)) {
+    $sections = [
+      [
+        'image' => '/images/club-img.jpg',
+        'title' => 'Un club fait pour tous',
+        'description' => "Que vous soyez débutant curieux ou joueur confirmé, notre club vous accueille dans un esprit de partage, de convivialité et de fair-play. Ici, chacun trouve sa place et progresse à son rythme."
+      ],
+    ];
+  }
+
   $eventsTitle = Homepage::find('events_title')->value ?? 'Nos prochains événements';
-  $eventsData = Homepage::find('events')->value ?? '[]';
-  $events = json_decode($eventsData, true) ?? [];
+  $lastEvents = \App\Filament\Pages\Homepage::getLatestEvents() ?? [];
+  $events = [];
+
+  foreach ($lastEvents as $event) {
+    $events[] = [
+      'image' => $event->image,
+      'title' => $event->title,
+      'description' => $event->description,
+    ];
+  }
 
   if (empty($events)) {
     $events = [
@@ -55,7 +73,7 @@
     <div class="container mx-auto flex flex-col md:flex-row items-center gap-12 px-8">
       <div class="flex-1 flex flex-col items-start justify-center gap-6">
         <h1 class="text-3xl md:text-4xl font-bold mb-2 font-heading">{{ $heroTitle }}</h1>
-        <p class="text-base md:text-lg text-gray-700 mb-4 font-body" style="font-size: 15px;">{!! $heroDesc !!}</p>
+        <div class="text-base md:text-lg text-gray-700 mb-4 font-body" style="font-size: 15px;">{!! $heroDesc !!}</div>
         @include('layouts.cta-button')
       </div>
       <div class="flex-1 flex justify-center">
@@ -74,11 +92,11 @@
         </div>
         <div class="flex-1 flex flex-col items-start justify-center gap-6">
           <h3 class="text-3xl md:text-3xl font-bold mb-2 font-heading">{{ $section['title'] }}</h3>
-          <p class="text-base md:text-lg text-gray-700 mb-4 font-body" style="font-size: 15px;">
-            {!! $section['description'] !!}</p>
+          <div class="text-base md:text-lg text-gray-700 mb-4 font-body" style="font-size: 15px;">
+            {!! $section['description'] !!}
+          </div>
           @include('layouts.cta-button')
         </div>
-      </div>
     @endforeach
   </section>
 

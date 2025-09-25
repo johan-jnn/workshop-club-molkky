@@ -31,7 +31,6 @@ class Homepage extends Page
         $data = \App\Models\Homepage::all()->pluck('value', 'key')->toArray();
 
         $data['sections'] = json_decode($data['sections'] ?? '[]', true);
-        $data['events'] = json_decode($data['events'] ?? '[]', true);
 
         $this->form->fill(
             $data
@@ -44,18 +43,15 @@ class Homepage extends Page
             ->schema([
                 Section::make('Hero')->components([
                     TextInput::make('hero_title')
-                        ->label('Titre')
-                        ->required(),
+                        ->label('Titre'),
                     RichEditor::make('hero_description')
-                        ->required()
                         ->label('Description'),
                     FileUpload::make('hero_image')
                         ->label('Image')
                         ->image()
-                        ->directory('events')
+                        ->directory('homepage')
                         ->disk('public')
-                        ->visibility('public')
-                        ->required(),
+                        ->visibility('public'),
                 ]),
                 Section::make('Sections')
                     ->components(
@@ -65,50 +61,22 @@ class Homepage extends Page
                                 ->label('Sections')
                                 ->components([
                                     TextInput::make('title')
-                                        ->label('Titre')
-                                        ->required(),
+                                        ->label('Titre'),
                                     RichEditor::make('description')
-                                        ->label('Description')
-                                        ->required(),
+                                        ->label('Description'),
                                     FileUpload::make('image')
                                         ->label('Image')
                                         ->image()
-                                        ->directory('events')
+                                        ->directory('homepage')
                                         ->disk('public')
-                                        ->visibility('public')
-                                        ->required(),
-                                ])
-                                ->minItems(1),
+                                        ->visibility('public'),
+                                ]),
                         ]
                     ),
                 Section::make('Événements')
                     ->components([
                         TextInput::make('events_title')
-                            ->label('Titre de la section événements')
-                            ->required(),
-                        Repeater::make('events')
-                            ->hiddenLabel()
-                            ->label('Événements')
-                            ->components([
-                                FileUpload::make('image')
-                                    ->label('Image')
-                                    ->image()
-                                    ->directory('events')
-                                    ->disk('public')
-                                    ->visibility('public')
-                                    ->required(),
-                                TextInput::make('title')
-                                    ->label('Titre')
-                                    ->required(),
-                                RichEditor::make('description')
-                                    ->label('Description')
-                                    ->required(),
-                            ])
-                            ->minItems(1)
-                            ->maxItems(3)
-                            ->addActionLabel('Ajouter un événement')
-                            ->reorderableWithButtons()
-                            ->collapsible(),
+                            ->label('Titre de la section événements'),
                     ]),
             ])
             ->statePath('data');
@@ -117,8 +85,7 @@ class Homepage extends Page
     public function save(): void
     {
         $data = $this->form->getState();
-        $data['sections'] = json_encode($data['sections']);
-        $data['events'] = json_encode($data['events']);
+        $data['sections'] = json_encode($data['sections'] ?? []);
 
         $updated = 0;
 
@@ -134,5 +101,26 @@ class Homepage extends Page
             ->title("$updated / ".count($data).' modifications apportées.')
             ->success()
             ->send();
+    }
+
+    /**
+     * Récupère les 3 derniers événements pour l'affichage sur la homepage
+     * Méthode statique pour être utilisable dans le template Blade
+     */
+    public static function getLatestEvents()
+    {
+        return \App\Models\Event::orderBy('created_at', 'desc')
+            ->limit(3)
+            ->get();
+    }
+
+    /**
+     * Fournit les données pour la vue (utilisé par Filament)
+     */
+    protected function getViewData(): array
+    {
+        return array_merge(parent::getViewData(), [
+            'events' => self::getLatestEvents(),
+        ]);
     }
 }

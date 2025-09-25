@@ -14,28 +14,130 @@ use UnitEnum;
 
 class Aboutpage extends Page
 {
-    protected string $view = 'filament.pages.aboutpage';
+  protected string $view = 'filament.pages.aboutpage';
 
-    protected static ?string $title = 'A propos';
+  protected static ?string $title = 'A propos';
 
-    protected static string|UnitEnum|null $navigationGroup = 'Pages';
+  protected static string|UnitEnum|null $navigationGroup = 'Pages';
 
-    protected static ?string $navigationLabel = 'A propos';
+  protected static ?string $navigationLabel = 'A propos';
 
-    protected static ?int $navigationSort = 2;
+  protected static ?int $navigationSort = 2;
 
-    public array $data = [];
+  public array $data = [];
 
-    public function mount(): void
-    {
-        $data = \App\Models\Aboutpage::all()->pluck('value', 'key')->toArray();
+  public function mount(): void
+  {
+    $data = \App\Models\Aboutpage::all()->pluck("value", "key")->toArray();
 
-        $data['sections'] = json_decode($data['sections'] ?? '[]', true);
-        $data['values'] = json_decode($data['values'] ?? '[]', true);
+    $data["stories"] = json_decode($data["stories"] ?? "[]", true);
+    $data["values"] = json_decode($data["values"] ?? "[]", true);
+    $data["members"] = json_decode($data["members"] ?? "[]", true);
 
-        $this->form->fill(
-            $data
-        );
+    $this->form->fill(
+      $data
+    );
+  }
+
+  public function form(Schema $form): Schema
+  {
+    return $form
+      ->schema([
+        Section::make('Hero')->components([
+          TextInput::make('hero_title')
+            ->label("Titre"),
+          RichEditor::make('hero_description')
+            ->label("Description"),
+          FileUpload::make('hero_image')
+            ->label("Image")
+            ->image()
+            ->directory('aboutpage')
+            ->disk('public')
+            ->visibility('public'),
+        ]),
+        Section::make('Histoire de l\'association')
+          ->components([
+              TextInput::make('stories_title')
+                ->label("Titre de la section histoire de l\'association"),
+              Repeater::make('stories')
+                ->hiddenLabel()
+                ->label("Histoires")
+                ->components([
+                  TextInput::make('title')
+                    ->label("Titre"),
+                  RichEditor::make('description')
+                    ->label("Description"),
+                  FileUpload::make('image')
+                    ->label("Image")
+                    ->image()
+                    ->directory('stories')
+                    ->disk('public')
+                    ->visibility('public'),
+                ])
+                ->minItems(1)
+                ->addActionLabel('Ajouter une histoire')
+            ]
+          ),
+        Section::make('Valeurs de l\'association')
+          ->components([
+            TextInput::make('values_title')
+              ->label("Titre de la section valeurs de l\'association"),
+            Repeater::make('values')
+              ->hiddenLabel()
+              ->label("Valeurs")
+              ->components([
+                TextInput::make('title')
+                  ->label("Titre"),
+                RichEditor::make('description')
+                  ->label("Description")
+              ])
+              ->minItems(1)
+              ->maxItems(3)
+              ->addActionLabel('Ajouter une valeur')
+              ->reorderableWithButtons()
+              ->collapsible()
+              ]),
+          Section::make('Bureau de l\'association')
+            ->components([
+              TextInput::make('members_title')
+                ->label("Titre"),
+              TextInput::make('members_description')
+                ->label("Description"),
+              Repeater::make('members')
+                ->hiddenLabel()
+                ->label("Membres")
+                ->components([
+                  TextInput::make('title')
+                    ->label("Titre"),
+                  FileUpload::make('image')
+                    ->label("Image")
+                    ->image()
+                    ->directory('members')
+                    ->disk('public')
+                    ->visibility('public')
+                ])
+                ->addActionLabel('Ajouter un membre')
+            ]
+          ),
+      ])
+      ->statePath('data');
+  }
+
+  public function save(): void
+  {
+    $data = $this->form->getState();
+    $data["stories"] = json_encode($data["stories"] ?? []);
+    $data["values"] = json_encode($data["values"] ?? []);
+    $data["members"] = json_encode($data["members"] ?? []);
+
+    $updated = 0;
+
+    foreach ($data as $key => $value) {
+      \App\Models\Aboutpage::updateOrCreate(
+        ['key' => $key],
+        ['value' => $value]
+      );
+      $updated++;
     }
 
     public function form(Schema $form): Schema

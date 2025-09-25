@@ -8,22 +8,19 @@ use Filament\Schemas\Schema;
 
 class SettingForm
 {
-    public static function configure(Schema $schema): Schema
-    {
-        return $schema
-            ->components([
-                TextInput::make('key')
-                    ->label('Clé')
-                    ->required(),
-                TextInput::make('label')
-                    ->label('Label')
-                    ->required(),
-                TextInput::make('value')
-                    ->label('Valeur')
-                    ->required(),
-                DateTimePicker::make('updated_date')
-                    ->label('Date de mise à jour')
-                    ->required(),
-            ]);
-    }
+  public static function configure(Schema $schema): Schema
+  {
+    return $schema
+      ->components([
+        TextInput::make('key')
+          ->label('Clé')
+          ->required(),
+        TextInput::make('label')
+          ->label('Label')
+          ->required(),
+        TextInput::make('value')
+          ->label('Valeur')
+          ->required()
+      ]);
+  }
 }
