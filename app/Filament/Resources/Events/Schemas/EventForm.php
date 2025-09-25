@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Events\Schemas;
 
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
@@ -19,6 +20,13 @@ class EventForm
                 Textarea::make('description')
                     ->rows(3)
                     ->columnSpanFull()
+                    ->required(),
+                FileUpload::make('image')
+                    ->label('Image')
+                    ->image()
+                    ->directory('events')
+                    ->disk('public')
+                    ->visibility('public')
                     ->required(),
                 TextInput::make('address')
                     ->label('Adresse')
