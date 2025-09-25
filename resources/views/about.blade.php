@@ -54,7 +54,7 @@
   }
 
   $membersTitle = Aboutpage::find('members_title')->value ?? 'Notre bureau';
-  $membersDesc = Aboutpage::find('members_title')->value ?? 'C\'est à eux que nous devons la bonne organisation du club et de ses événements.';
+  $membersDesc = Aboutpage::find('members_description')->value ?? 'C\'est à eux que nous devons la bonne organisation du club et de ses événements.';
   $membersData = Aboutpage::find('members')->value ?? '[]';
   $members = json_decode($membersData, true) ?? [];
 
@@ -81,7 +81,7 @@
     <div class="container mx-auto flex flex-col md:flex-row items-center gap-12 px-8">
       <div class="flex-1 flex flex-col items-start justify-center gap-6">
         <h1 class="text-3xl md:text-4xl font-bold mb-2 font-heading text-white">{{ $heroTitle }}</h1>
-        <p class="text-base md:text-lg text-gray-100 mb-4 font-body" style="font-size: 15px;">{{ $heroDesc }}</p>
+        <div class="text-base md:text-lg text-gray-100 mb-4 font-body" style="font-size: 15px;">{!! $heroDesc !!}</div>
         @include('layouts.cta-button')
       </div>
       <div class="flex-1 flex justify-center">
@@ -104,9 +104,9 @@
           </div>
           <div class="flex-1 flex flex-col items-start justify-center gap-2">
             <h2 class="text-2xl md:text-3xl font-bold mb-2 font-heading text-black">{{ $story['title'] }}</h2>
-            <p class="text-base md:text-lg text-gray-700 mb-4 font-body" style="font-size: 15px;">
-              {{ $story['description'] }}
-            </p>
+            <div class="text-base md:text-lg text-gray-700 mb-4 font-body" style="font-size: 15px;">
+              {!! $story['description'] !!}
+            </div>
           </div>
         </div>
       @endforeach
@@ -122,9 +122,9 @@
       @foreach ($values as $value)
         <div class="flex-1 flex flex-col items-center bg-white rounded-lg shadow-md p-6">
           <h3 class="text-xl font-bold mb-2 text-center font-heading text-black">{{ $value['title'] }}</h3>
-          <p class="text-base md:text-lg text-gray-700 text-center font-body" style="font-size: 15px;">
-            {{ $value['description'] }}
-          </p>
+          <div class="text-base md:text-lg text-gray-700 text-center font-body" style="font-size: 15px;">
+            {!! $value['description'] !!}
+          </div>
         </div>
       @endforeach
     </div>
@@ -134,9 +134,9 @@
   <section class="w-full py-16 bg-[#333333] px-30" style="border-bottom: 2px solid #fff;">
     <div class="container mx-auto px-8">
       <h2 class="text-3xl md:text-4xl font-bold mb-6 text-center font-heading text-white">{{ $membersTitle }}</h2>
-      <p class="text-base md:text-lg text-gray-100 mb-10 text-center font-body" style="font-size: 15px;">
-        {{ $membersDesc }}
-      </p>
+      <div class="text-base md:text-lg text-gray-100 mb-10 text-center font-body" style="font-size: 15px;">
+        {!! $membersDesc !!}
+      </div>
       <div class="flex flex-row gap-8 justify-center items-center">
         @foreach ($members as $member)
           <div class="flex flex-col items-center gap-2">

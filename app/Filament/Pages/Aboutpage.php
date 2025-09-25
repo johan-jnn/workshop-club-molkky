@@ -30,8 +30,9 @@ class Aboutpage extends Page
   {
     $data = \App\Models\Aboutpage::all()->pluck("value", "key")->toArray();
 
-    $data["sections"] = json_decode($data["sections"] ?? "[]", true);
+    $data["stories"] = json_decode($data["stories"] ?? "[]", true);
     $data["values"] = json_decode($data["values"] ?? "[]", true);
+    $data["members"] = json_decode($data["members"] ?? "[]", true);
 
     $this->form->fill(
       $data
@@ -44,41 +45,34 @@ class Aboutpage extends Page
       ->schema([
         Section::make('Hero')->components([
           TextInput::make('hero_title')
-            ->label("Titre")
-            ->required(),
+            ->label("Titre"),
           RichEditor::make('hero_description')
-            ->required()
             ->label("Description"),
           FileUpload::make('hero_image')
             ->label("Image")
             ->image()
-            ->directory('events')
+            ->directory('aboutpage')
             ->disk('public')
-            ->visibility('public')
-            ->required(),
+            ->visibility('public'),
         ]),
         Section::make('Histoire de l\'association')
           ->components([
               TextInput::make('stories_title')
-                ->label("Titre de la section histoire de l\'association")
-                ->required(),
+                ->label("Titre de la section histoire de l\'association"),
               Repeater::make('stories')
                 ->hiddenLabel()
                 ->label("Histoires")
                 ->components([
                   TextInput::make('title')
-                    ->label("Titre")
-                    ->required(),
+                    ->label("Titre"),
                   RichEditor::make('description')
-                    ->label("Description")
-                    ->required(),
+                    ->label("Description"),
                   FileUpload::make('image')
                     ->label("Image")
                     ->image()
                     ->directory('stories')
                     ->disk('public')
-                    ->visibility('public')
-                    ->required(),
+                    ->visibility('public'),
                 ])
                 ->minItems(1)
                 ->addActionLabel('Ajouter une histoire')
@@ -87,18 +81,15 @@ class Aboutpage extends Page
         Section::make('Valeurs de l\'association')
           ->components([
             TextInput::make('values_title')
-              ->label("Titre de la section valeurs de l\'association")
-              ->required(),
+              ->label("Titre de la section valeurs de l\'association"),
             Repeater::make('values')
               ->hiddenLabel()
               ->label("Valeurs")
               ->components([
                 TextInput::make('title')
-                  ->label("Titre")
-                  ->required(),
+                  ->label("Titre"),
                 RichEditor::make('description')
                   ->label("Description")
-                  ->required()
               ])
               ->minItems(1)
               ->maxItems(3)
@@ -109,24 +100,22 @@ class Aboutpage extends Page
           Section::make('Bureau de l\'association')
             ->components([
               TextInput::make('members_title')
-                ->label("Titre de la section membres de l\'association")
-                ->required(),
+                ->label("Titre"),
+              TextInput::make('members_description')
+                ->label("Description"),
               Repeater::make('members')
                 ->hiddenLabel()
                 ->label("Membres")
                 ->components([
                   TextInput::make('title')
-                    ->label("Titre")
-                    ->required(),
+                    ->label("Titre"),
                   FileUpload::make('image')
                     ->label("Image")
                     ->image()
                     ->directory('members')
                     ->disk('public')
                     ->visibility('public')
-                    ->required(),
                 ])
-                ->minItems(1)
                 ->addActionLabel('Ajouter un membre')
             ]
           ),
@@ -137,8 +126,9 @@ class Aboutpage extends Page
   public function save(): void
   {
     $data = $this->form->getState();
-    $data["stories"] = json_encode($data["stories"]);
-    $data["values"] = json_encode($data["values"]);
+    $data["stories"] = json_encode($data["stories"] ?? []);
+    $data["values"] = json_encode($data["values"] ?? []);
+    $data["members"] = json_encode($data["members"] ?? []);
 
     $updated = 0;
 
