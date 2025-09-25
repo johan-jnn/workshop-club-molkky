@@ -14,5 +14,6 @@ class DatabaseSeeder extends Seeder
   public function run(): void
   {
     (new HomepageSeeder())->run();
+    (new SettingsSeeder())->run();
   }
 }

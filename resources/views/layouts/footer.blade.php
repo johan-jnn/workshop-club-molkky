@@ -38,8 +38,8 @@
 
 		<div class="flex flex-col items-center gap-2 mb-6 md:mb-0">
 			<div class="flex gap-16">
-				<a href="{{ Setting::where('key', 'mentions_legals_link')->first()->value }}" target="_blank" rel=" noopener norefere"" class="hover:text-wood-light transition text-white underline font-body">Mentions légales</a>
-				<a href="{{ Setting::where('key', 'rgpd_link')->first()->value }}" target="_blank" rel=" noopener norefere"" class="hover:text-wood-light transition text-white underline font-body">RGPD</a>
+				<a href="{{ Setting::where('key', 'mentions_legals_link')->first()->value ?? "#mentions" }}" target="_blank" rel=" noopener norefere"" class="hover:text-wood-light transition text-white underline font-body">Mentions légales</a>
+				<a href="{{ Setting::where('key', 'rgpd_link')->first()->value ?? "#rgpd" }}" target="_blank" rel=" noopener norefere"" class="hover:text-wood-light transition text-white underline font-body">RGPD</a>
 			</div>
 		</div>
 
