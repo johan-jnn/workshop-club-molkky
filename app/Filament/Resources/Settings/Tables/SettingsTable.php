@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Settings\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
@@ -32,11 +33,17 @@ class SettingsTable
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                EditAction::make()
+                    ->label('Modifier le paramètre'),
+                DeleteAction::make()
+                    ->label('Supprimer')
+                    ->successNotificationTitle('Paramètre supprimé'),
+
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()
+                        ->label('Supprimer les paramètres sélectionnés'),
                 ]),
             ]);
     }

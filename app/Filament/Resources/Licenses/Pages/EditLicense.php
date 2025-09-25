@@ -25,6 +25,7 @@ class EditLicense extends EditRecord
     {
         return [
             DeleteAction::make()
+                ->label('Supprimer la licence')
                 ->successNotification(
                     Notification::make()
                         ->icon('heroicon-o-trash')

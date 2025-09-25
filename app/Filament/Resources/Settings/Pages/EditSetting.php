@@ -25,6 +25,7 @@ class EditSetting extends EditRecord
     {
         return [
             DeleteAction::make()
+                ->label('Supprimer le paramètre')
                 ->successNotification(
                     Notification::make()
                         ->icon('heroicon-o-trash')

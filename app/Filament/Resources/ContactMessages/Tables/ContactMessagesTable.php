@@ -3,8 +3,9 @@
 namespace App\Filament\Resources\ContactMessages\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -41,11 +42,18 @@ class ContactMessagesTable
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                DeleteAction::make()
+                    ->label('Supprimer')
+                    ->successNotificationTitle('Message supprimé'),
+                ViewAction::make()
+                    ->label('Voir')
+                    ->modalWidth('2xl'),
+
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()
+                        ->label('Supprimer'),
                 ]),
             ]);
     }
