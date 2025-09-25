@@ -85,7 +85,7 @@ class Homepage extends Page
     public function save(): void
     {
         $data = $this->form->getState();
-        $data['sections'] = json_encode($data['sections'] ?? '[]');
+        $data['sections'] = json_encode($data['sections'] ?? []);
 
         $updated = 0;
 
