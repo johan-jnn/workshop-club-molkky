@@ -69,28 +69,28 @@
 @endsection
 
 @section('content')
-  <section class="w-full py-16 px-30">
-    <div class="container mx-auto flex flex-col md:flex-row items-center gap-12 px-8">
-      <div class="flex-1 flex flex-col items-start justify-center gap-6">
-        <h1 class="text-3xl md:text-4xl font-bold mb-2 font-heading">{{ $heroTitle }}</h1>
-        <p class="text-base md:text-lg text-gray-700 mb-4 font-body" style="font-size: 15px;">{!! $heroDesc !!}</p>
+  <section class="w-full pt-8 sm:pt-16 md:pt-24 pb-16 px-[15px] sm:px-8 md:px-30">
+    <div class="container mx-auto flex flex-col md:flex-row items-center justify-center gap-8 px-[15px] sm:px-8">
+  <div class="flex-1 flex flex-col items-center md:items-start justify-center md:justify-start gap-5">
+  <h1 class="text-[20px] md:text-4xl font-bold mb-2 font-heading text-center md:text-left">{{ $heroTitle }}</h1>
+  <div class="text-[12px] md:text-lg text-gray-700 mb-4 font-body text-center md:text-left">{!! $heroDesc !!}</div>
         @include('layouts.cta-button')
       </div>
       <div class="flex-1 flex justify-center">
         <img src="{{ getImageUrl($heroImage) }}" alt="{{ $heroTitle }}"
-          class="max-w-xs md:max-w-md rounded-lg shadow-lg object-cover transition-transform duration-300 ease-in-out hover:scale-105">
+          class="w-full sm:max-w-xs md:max-w-md rounded-lg shadow-lg object-cover transition-transform duration-300 ease-in-out hover:scale-105">
       </div>
     </div>
   </section>
 
-  <section class="grid grid-cols-1 w-full pb-16 pt-16 px-30 gap-8">
+  <section class="grid grid-cols-1 w-full pb-16 pt-16 px-[15px] sm:px-8 md:px-30 gap-8">
     @foreach ($sections as $section)
-      <div class="container mx-auto flex flex-col md:flex-row items-center gap-12 px-8">
+  <div class="container mx-auto flex flex-col md:flex-row items-center gap-8 px-[15px] sm:px-8">
         <div class="flex-1 flex justify-center mb-8 md:mb-0">
           <img src="{{ getImageUrl($section['image']) }}" alt="{{ $section['title'] }}"
             class="max-w-xs md:max-w-md rounded-lg shadow-lg object-cover transition-transform duration-300 ease-in-out hover:scale-105">
         </div>
-        <div class="flex-1 flex flex-col items-start justify-center gap-6">
+        <div class="flex-1 flex flex-col items-start justify-center gap-5">
           <h3 class="text-3xl md:text-3xl font-bold mb-2 font-heading">{{ $section['title'] }}</h3>
           <p class="text-base md:text-lg text-gray-700 mb-4 font-body" style="font-size: 15px;">
             {!! $section['description'] !!}</p>
@@ -100,8 +100,8 @@
     @endforeach
   </section>
 
-  <section class="w-full pb-24 pt-8 px-30">
-    <div class="container mx-auto px-8">
+  <section class="w-full pb-24 pt-8 px-[15px] sm:px-8 md:px-30">
+    <div class="container mx-auto px-[15px] sm:px-8">
       <h2 class="text-3xl md:text-4xl font-bold mb-15 text-center font-heading">{{ $eventsTitle }}</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         @foreach ($events as $event)
