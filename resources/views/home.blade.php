@@ -20,9 +20,27 @@
   $sectionsData = Homepage::find('sections')->value ?? '[]';
   $sections = json_decode($sectionsData, true) ?? [];
 
+  if (empty($sections)) {
+    $sections = [
+      [
+        'image' => '/images/club-img.jpg',
+        'title' => 'Un club fait pour tous',
+        'description' => "Que vous soyez débutant curieux ou joueur confirmé, notre club vous accueille dans un esprit de partage, de convivialité et de fair-play. Ici, chacun trouve sa place et progresse à son rythme."
+      ],
+    ];
+  }
+
   $eventsTitle = Homepage::find('events_title')->value ?? 'Nos prochains événements';
-  $eventsData = Homepage::find('events')->value ?? '[]';
-  $events = json_decode($eventsData, true) ?? [];
+  $lastEvents = \App\Filament\Pages\Homepage::getLatestEvents() ?? [];
+  $events = [];
+
+  foreach ($lastEvents as $event) {
+    $events[] = [
+      'image' => $event->image,
+      'title' => $event->title,
+      'description' => $event->description,
+    ];
+  }
 
   if (empty($events)) {
     $events = [
