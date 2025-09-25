@@ -9,7 +9,8 @@ Route::view('/events', 'events');
 Route::view('/contact', 'contact');
 Route::post('/contact', [ContactMessageController::class, 'store'])->name('contact.store');
 
-Route::get('setup-app', function () {
+// Useless because we're using infinityfree
+Route::get('/setup-app', function () {
   $migrated = Artisan::call("migrate --env production");
   $seeded = Artisan::call("db:seed --env production");
 
