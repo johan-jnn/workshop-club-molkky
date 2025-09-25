@@ -25,6 +25,7 @@ class EditAdherent extends EditRecord
     {
         return [
             DeleteAction::make()
+                ->label('Supprimer l\'adherent')
                 ->successNotification(
                     Notification::make()
                         ->icon('heroicon-o-trash')

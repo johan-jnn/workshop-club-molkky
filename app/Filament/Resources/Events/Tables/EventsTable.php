@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Events\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
@@ -45,11 +46,16 @@ class EventsTable
                 // Add filters if needed
             ])
             ->recordActions([
-                EditAction::make(),
+                EditAction::make()
+                    ->label('Modifier'),
+                DeleteAction::make()
+                    ->label('Supprimer')
+                    ->successNotificationTitle('Événement supprimé'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()
+                        ->label('Supprimer les événements sélectionnés'),
                 ]),
             ]);
     }

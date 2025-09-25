@@ -7,6 +7,7 @@ use App\Filament\Resources\ContactMessages\Schemas\ContactMessageForm;
 use App\Filament\Resources\ContactMessages\Tables\ContactMessagesTable;
 use App\Models\ContactMessage;
 use BackedEnum;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -40,6 +41,16 @@ class ContactMessageResource extends Resource
     public static function table(Table $table): Table
     {
         return ContactMessagesTable::configure($table);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return $schema->components([
+            TextEntry::make('message')
+                ->label('Message')
+                ->wrap()
+                ->columnSpanFull(),
+        ]);
     }
 
     public static function getRelations(): array

@@ -26,6 +26,7 @@ class EditReservation extends EditRecord
         return [
 
             DeleteAction::make()
+                ->label('Supprimer la réservation')
                 ->successNotification(
                     Notification::make()
                         ->icon('heroicon-o-trash')

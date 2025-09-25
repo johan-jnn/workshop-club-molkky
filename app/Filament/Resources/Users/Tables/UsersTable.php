@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Users\Tables;
 
 use App\Enums\Role;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
@@ -68,12 +69,18 @@ class UsersTable
                     ->multiple(), // permet de sélectionner plusieurs rôles
             ])
             ->recordActions([
-                EditAction::make(),
-            ])
+            EditAction::make()
+                    ->label('Modifier'),
+            DeleteAction::make()
+                    ->label('Supprimer')
+                    ->successNotificationTitle('Utilisateur supprimé'),
+
+        ])
             ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
-            ]);
+            BulkActionGroup::make([
+                    DeleteBulkAction::make()
+                        ->label('Supprimer les utilisateurs sélectionnés'),
+            ]),
+        ]);
     }
 }

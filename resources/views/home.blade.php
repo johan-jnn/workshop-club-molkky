@@ -56,7 +56,7 @@
       ],
       [
         'image' => '/images/event3.jpg',
-        'title' => 'Soiree conviviale de fin d\'année',
+        'title' => 'Soirée conviviale de fin d\'année',
         'description' => "Nous vous invitons à notre soirée conviviale de fin d'année pour célébrer ensemble les réussites de l'année écoulée."
       ],
     ];
@@ -69,51 +69,80 @@
 @endsection
 
 @section('content')
-  <section class="w-full py-16 px-30">
-    <div class="container mx-auto flex flex-col md:flex-row items-center gap-12 px-8">
-      <div class="flex-1 flex flex-col items-start justify-center gap-6">
-        <h1 class="text-3xl md:text-4xl font-bold mb-2 font-heading">{{ $heroTitle }}</h1>
-        <p class="text-base md:text-lg text-gray-700 mb-4 font-body" style="font-size: 15px;">{!! $heroDesc !!}</p>
-        @include('layouts.cta-button')
-      </div>
-      <div class="flex-1 flex justify-center">
-        <img src="{{ getImageUrl($heroImage) }}" alt="{{ $heroTitle }}"
-          class="max-w-xs md:max-w-md rounded-lg shadow-lg object-cover transition-transform duration-300 ease-in-out hover:scale-105">
+  {{-- Section Hero --}}
+  <section class="w-full py-12 md:py-16 lg:py-24">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center gap-8 lg:gap-12">
+        {{-- Contenu texte --}}
+        <div class="flex-1 text-center md:text-left">
+          <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 font-heading">
+            {{ $heroTitle }}
+          </h1>
+          <div class="text-sm sm:text-base lg:text-lg text-gray-700 mb-6 font-body">
+            {!! $heroDesc !!}
+          </div>
+          @include('layouts.cta-button')
+        </div>
+        {{-- Image --}}
+        <div class="flex-1 w-full">
+          <img src="{{ getImageUrl($heroImage) }}" alt="{{ $heroTitle }}"
+            class="w-full max-w-sm md:max-w-md mx-auto rounded-lg shadow-lg object-cover transition-transform duration-300 hover:scale-105">
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="grid grid-cols-1 w-full pb-16 pt-16 px-30 gap-8">
-    @foreach ($sections as $section)
-      <div class="container mx-auto flex flex-col md:flex-row items-center gap-12 px-8">
-        <div class="flex-1 flex justify-center mb-8 md:mb-0">
-          <img src="{{ getImageUrl($section['image']) }}" alt="{{ $section['title'] }}"
-            class="max-w-xs md:max-w-md rounded-lg shadow-lg object-cover transition-transform duration-300 ease-in-out hover:scale-105">
-        </div>
-        <div class="flex-1 flex flex-col items-start justify-center gap-6">
-          <h3 class="text-3xl md:text-3xl font-bold mb-2 font-heading">{{ $section['title'] }}</h3>
-          <p class="text-base md:text-lg text-gray-700 mb-4 font-body" style="font-size: 15px;">
-            {!! $section['description'] !!}</p>
-          @include('layouts.cta-button')
-        </div>
-      </div>
-    @endforeach
-  </section>
-
-  <section class="w-full pb-24 pt-8 px-30">
-    <div class="container mx-auto px-8">
-      <h2 class="text-3xl md:text-4xl font-bold mb-15 text-center font-heading">{{ $eventsTitle }}</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        @foreach ($events as $event)
-          <div class="bg-white rounded-lg shadow-md flex flex-col items-center pb-6">
-            <img src="{{ getImageUrl($event['image']) }}" alt="{{ $event['title'] }}"
-              class="w-200 h-40 object-cover rounded-md mb-4 transition-transform duration-300 ease-in-out hover:scale-105">
-            <h4 class="text-xl font-semibold mb-2 font-heading">{{ $event['title'] }}</h4>
-            <div class="text-gray-700 text-center font-body prose prose-sm max-w-none px-4" style="font-size: 14px;">
-              {!! $event['description'] !!}
+  {{-- Sections alternées --}}
+  <section class="w-full py-12 md:py-16">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="space-y-12 md:space-y-16">
+        @foreach ($sections as $index => $section)
+          <div class="flex flex-col {{ $loop->even ? 'md:flex-row-reverse' : 'md:flex-row' }} items-center gap-8 lg:gap-12">
+            {{-- Image --}}
+            <div class="flex-1 w-full">
+              <img src="{{ getImageUrl($section['image']) }}" alt="{{ $section['title'] }}"
+                class="w-full max-w-sm md:max-w-md mx-auto rounded-lg shadow-lg object-cover transition-transform duration-300 hover:scale-105">
+            </div>
+            {{-- Contenu --}}
+            <div class="flex-1 text-center md:text-left">
+              <h3 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 font-heading">
+                {{ $section['title'] }}
+              </h3>
+              <div class="text-sm sm:text-base lg:text-lg text-gray-700 mb-6 font-body">
+                {!! $section['description'] !!}
+              </div>
+              @include('layouts.cta-button')
             </div>
           </div>
         @endforeach
       </div>
+    </div>
+  </section>
+
+  {{-- Section Événements --}}
+  <section class="w-full py-12 md:py-16 lg:py-24">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-8 md:mb-12 font-heading text-center max-md:text-left">
+        {{ $eventsTitle }}
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        @foreach ($events as $event)
+          <div class="bg-white rounded-lg shadow-md overflow-hidden group">
+            <div class="aspect-w-16 aspect-h-9 overflow-hidden">
+              <img src="{{ getImageUrl($event['image']) }}" alt="{{ $event['title'] }}"
+                class="w-full h-40 object-cover transition-transform duration-300 group-hover:scale-105">
+            </div>
+            <div class="p-4 lg:p-6">
+              <h4 class="text-lg sm:text-xl font-semibold mb-2 font-heading">
+                {{ $event['title'] }}
+              </h4>
+              <div class="text-sm text-gray-700 font-body prose prose-sm max-w-none">
+                {!! $event['description'] !!}
+              </div>
+            </div>
+          </div>
+        @endforeach
+      </div>
+    </div>
   </section>
 @endsection
