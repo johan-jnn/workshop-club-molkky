@@ -2,10 +2,10 @@
 
 namespace App\Filament\Pages;
 
-use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\FileUpload;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Schemas\Components\Section;
@@ -129,7 +129,9 @@ class Aboutpage extends Page
               ->maxItems(3)
               ->addActionLabel('Ajouter une valeur')
               ->reorderableWithButtons()
-              ->collapsible(),
+
+              ->collapsible()
+
           ]),
         Section::make('Bureau de l\'association')
           ->components(
@@ -159,4 +161,29 @@ class Aboutpage extends Page
       ])
       ->statePath('data');
   }
+
+
+  public function save(): void
+  {
+    $data = $this->form->getState();
+    $data["stories"] = json_encode($data["stories"] ?? []);
+    $data["values"] = json_encode($data["values"] ?? []);
+    $data["members"] = json_encode($data["members"] ?? []);
+
+    $updated = 0;
+
+    foreach ($data as $key => $value) {
+      \App\Models\Aboutpage::updateOrCreate(
+        ['key' => $key],
+        ['value' => $value]
+      );
+      $updated++;
+    }
+
+    Notification::make()
+      ->title("$updated / " . count($data) . " modifications apportées.")
+      ->success()
+      ->send();
+  }
+
 }
