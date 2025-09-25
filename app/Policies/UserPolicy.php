@@ -39,21 +39,21 @@ class UserPolicy
         return $user->id == $model->id || $user->role->value >= Role::CONTRIBUTOR->value;
     }
 
-  /**
-   * Determine whether the user can update the role field.
-   */
-  public function updateRole(User $user, User $model): bool
-  {
-    return $user->role->value >= Role::ADMINISTRATOR->value;
-  }
+    /**
+     * Determine whether the user can update the role field.
+     */
+    public function updateRole(User $user, User $model): bool
+    {
+        return $user->role->value >= Role::ADMINISTRATOR->value;
+    }
 
-  /**
-   * Determine whether the user can update the password field.
-   */
-  public function updatePassword(User $user, User $model): bool
-  {
-    return $user->id == $model->id || $user->role->value >= Role::ADMINISTRATOR->value;
-  }
+    /**
+     * Determine whether the user can update the password field.
+     */
+    public function updatePassword(User $user, User $model): bool
+    {
+        return $user->id == $model->id || $user->role->value >= Role::ADMINISTRATOR->value;
+    }
 
     /**
      * Determine whether the user can delete the model.

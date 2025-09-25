@@ -58,7 +58,7 @@ class UsersTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-            SelectFilter::make('role')
+                SelectFilter::make('role')
                     ->label('Rôle')
                     ->options([
                         Role::USER->value => 'Utilisateur',
@@ -66,14 +66,14 @@ class UsersTable
                         Role::ADMINISTRATOR->value => 'Administrateur',
                     ])
                     ->multiple(), // permet de sélectionner plusieurs rôles
-        ])
+            ])
             ->recordActions([
-            EditAction::make(),
-        ])
+                EditAction::make(),
+            ])
             ->toolbarActions([
-            BulkActionGroup::make([
+                BulkActionGroup::make([
                     DeleteBulkAction::make(),
-            ]),
-        ]);
+                ]),
+            ]);
     }
 }
