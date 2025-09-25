@@ -15,83 +15,88 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable implements FilamentUser, HasName
 {
-  /** @use HasFactory<\Database\Factories\UserFactory> */
-  use HasFactory, Notifiable;
+    /** @use HasFactory<\Database\Factories\UserFactory> */
+    use HasFactory, Notifiable;
 
-  /**
-   * The attributes that are mass assignable.
-   *
-   * @var list<string>
-   */
-  protected $fillable = [
-    'role',
-    'first_name',
-    'last_name',
-    'email',
-    'birthdate',
-    'elo',
-    'phone_number',
-    'address',
-    'password',
-  ];
-
-  /**
-   * The attributes that should be hidden for serialization.
-   *
-   * @var list<string>
-   */
-  protected $hidden = [
-    'password',
-    'remember_token',
-  ];
-
-  /**
-   * Get the attributes that should be cast.
-   *
-   * @return array<string, string>
-   */
-  protected function casts(): array
-  {
-    return [
-      'role' => Role::class,
-      'birthdate' => 'date',
-      'email_verified_at' => 'datetime',
-      'password' => 'hashed',
-      'elo' => 'integer',
-    ];
-  }
+    public function getFilamentName(): string
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
 
     /**
-   * Get the reservations for the user.
-   */
-  public function reservations(): HasMany
-  {
-    return $this->hasMany(Reservation::class);
-  }
+     * The attributes that are mass assignable.
+     *
+     * @var list<string>
+     */
+    protected $fillable = [
+        'role',
+        'first_name',
+        'last_name',
+        'email',
+        'birthdate',
+        'elo',
+        'phone_number',
+        'address',
+        'password',
+    ];
 
-  /**
-   * Get the adherent record for the user.
-   */
-  public function adherent(): HasOne
-  {
-    return $this->hasOne(Adherent::class);
-  }
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var list<string>
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
-  /**
-   * Get the events that the user has reserved.
-   */
-  public function events(): HasManyThrough
-  {
-    return $this->hasManyThrough(Event::class, Reservation::class, 'user_id', 'id', 'id', 'event_id');
-  }
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'role' => Role::class,
+            'birthdate' => 'date',
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+            'elo' => 'integer',
+        ];
+    }
 
-  public function canAccessPanel(Panel $panel): bool
-  {
-    return $this->role->value >= Role::CONTRIBUTOR->value;
-  }
+    /**
+     * Get the reservations for the user.
+     */
+    public function reservations(): HasMany
+    {
+        return $this->hasMany(Reservation::class);
+    }
 
-  public function getFilamentName(): string
-  {
-    return $this->first_name . ' ' . $this->last_name;
-  }
+    /**
+     * Get the adherent record for the user.
+     */
+    public function adherent(): HasOne
+    {
+        return $this->hasOne(Adherent::class);
+    }
+
+    /**
+     * Get the events that the user has reserved.
+     */
+    public function events(): HasManyThrough
+    {
+        return $this->hasManyThrough(Event::class, Reservation::class, 'user_id', 'id', 'id', 'event_id');
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->role->value >= Role::CONTRIBUTOR->value;
+    }
+
+    public function getNameAttribute(): string
+    {
+        return trim("{$this->first_name} {$this->last_name}");
+    }
 }

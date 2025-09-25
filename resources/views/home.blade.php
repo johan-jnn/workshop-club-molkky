@@ -2,6 +2,17 @@
 @use(App\Models\Homepage)
 
 @php
+  function getImageUrl($imagePath, $defaultPath = null)
+  {
+    if (empty($imagePath)) {
+      return $defaultPath;
+    }
+    if (str_starts_with($imagePath, '/')) {
+      return $imagePath;
+    }
+    return Storage::url($imagePath);
+  }
+
   $heroTitle = Homepage::find('hero_title')->value ?? 'Club de Mölkky CRHOM – Convivialité & Précision';
   $heroDesc = Homepage::find('hero_description')->value ?? "Rejoignez notre club pour découvrir, pratiquer et partager le plaisir du mölkky dans une ambiance amicale et familiale. Tournois, entraînements et rencontres tout au long de l'année !";
   $heroImage = Homepage::find('hero_image')->value ?? '/images/hero-img.jpg';
@@ -9,9 +20,27 @@
   $sectionsData = Homepage::find('sections')->value ?? '[]';
   $sections = json_decode($sectionsData, true) ?? [];
 
+  if (empty($sections)) {
+    $sections = [
+      [
+        'image' => '/images/club-img.jpg',
+        'title' => 'Un club fait pour tous',
+        'description' => "Que vous soyez débutant curieux ou joueur confirmé, notre club vous accueille dans un esprit de partage, de convivialité et de fair-play. Ici, chacun trouve sa place et progresse à son rythme."
+      ],
+    ];
+  }
+
   $eventsTitle = Homepage::find('events_title')->value ?? 'Nos prochains événements';
-  $eventsData = Homepage::find('events')->value ?? '[]';
-  $events = json_decode($eventsData, true) ?? [];
+  $lastEvents = \App\Filament\Pages\Homepage::getLatestEvents() ?? [];
+  $events = [];
+
+  foreach ($lastEvents as $event) {
+    $events[] = [
+      'image' => $event->image,
+      'title' => $event->title,
+      'description' => $event->description,
+    ];
+  }
 
   if (empty($events)) {
     $events = [
@@ -48,7 +77,7 @@
         @include('layouts.cta-button')
       </div>
       <div class="flex-1 flex justify-center">
-        <img src="{{ Storage::url(path: $heroImage) }}" alt="{{ $heroTitle }}"
+        <img src="{{ getImageUrl($heroImage) }}" alt="{{ $heroTitle }}"
           class="max-w-xs md:max-w-md rounded-lg shadow-lg object-cover transition-transform duration-300 ease-in-out hover:scale-105">
       </div>
     </div>
@@ -58,7 +87,7 @@
     @foreach ($sections as $section)
       <div class="container mx-auto flex flex-col md:flex-row items-center gap-12 px-8">
         <div class="flex-1 flex justify-center mb-8 md:mb-0">
-          <img src="{{ Storage::url(path: $section['image']) }}" alt="{{ $section['title'] }}"
+          <img src="{{ getImageUrl($section['image']) }}" alt="{{ $section['title'] }}"
             class="max-w-xs md:max-w-md rounded-lg shadow-lg object-cover transition-transform duration-300 ease-in-out hover:scale-105">
         </div>
         <div class="flex-1 flex flex-col items-start justify-center gap-6">
@@ -77,7 +106,7 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         @foreach ($events as $event)
           <div class="bg-white rounded-lg shadow-md flex flex-col items-center pb-6">
-            <img src="{{ Storage::url($event['image']) }}" alt="{{ $event['title'] }}"
+            <img src="{{ getImageUrl($event['image']) }}" alt="{{ $event['title'] }}"
               class="w-200 h-40 object-cover rounded-md mb-4 transition-transform duration-300 ease-in-out hover:scale-105">
             <h4 class="text-xl font-semibold mb-2 font-heading">{{ $event['title'] }}</h4>
             <div class="text-gray-700 text-center font-body prose prose-sm max-w-none px-4" style="font-size: 14px;">

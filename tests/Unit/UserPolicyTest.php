@@ -14,7 +14,7 @@ class UserPolicyTest extends TestCase
         $user = new \App\Models\User([
             'role' => \App\Enums\Role::CONTRIBUTOR,
         ]);
-        $policy = new \App\Policies\UserPolicy();
+        $policy = new \App\Policies\UserPolicy;
         $this->assertTrue($policy->viewAny($user));
     }
 }

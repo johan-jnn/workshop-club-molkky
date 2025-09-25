@@ -32,7 +32,7 @@ class EditAdherent extends EditRecord
             ->success()
             ->title('Adherents supprimé')
             ->body('L\'adherent a été supprimé avec succès.'),
-        )
+        ),
     ];
   }
 }

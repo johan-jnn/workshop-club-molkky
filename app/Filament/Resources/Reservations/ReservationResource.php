@@ -17,48 +17,45 @@ use UnitEnum;
 
 class ReservationResource extends Resource
 {
-  protected static ?string $model = Reservation::class;
+    protected static ?string $model = Reservation::class;
 
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::DocumentCheck;
 
-  protected static string|BackedEnum|null $navigationIcon = Heroicon::DocumentCheck;
+    protected static ?string $recordTitleAttribute = 'id';
 
+    // Groupe principal
+    protected static string|UnitEnum|null $navigationGroup = 'Évenements';
 
-  protected static ?string $recordTitleAttribute = 'id';
+    protected static ?string $navigationLabel = 'Liste des réservations';
 
-  // Groupe principal
-  protected static string|UnitEnum|null $navigationGroup = 'Évenements';
+    protected static ?string $pluralModelLabel = 'Réservations';
 
-  protected static ?string $navigationLabel = 'Liste des réservations';
+    // Ordre dans le groupe
+    protected static ?int $navigationSort = 1;
 
-  protected static ?string $pluralModelLabel = 'Réservations';
+    public static function form(Schema $schema): Schema
+    {
+        return ReservationForm::configure($schema);
+    }
 
+    public static function table(Table $table): Table
+    {
+        return ReservationsTable::configure($table);
+    }
 
-  // Ordre dans le groupe
-  protected static ?int $navigationSort = 1;
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
 
-  public static function form(Schema $schema): Schema
-  {
-    return ReservationForm::configure($schema);
-  }
-
-  public static function table(Table $table): Table
-  {
-    return ReservationsTable::configure($table);
-  }
-
-  public static function getRelations(): array
-  {
-    return [
-      //
-    ];
-  }
-
-  public static function getPages(): array
-  {
-    return [
-      'index' => ListReservations::route('/'),
-      'create' => CreateReservation::route('/create'),
-      'edit' => EditReservation::route('/{record}/edit'),
-    ];
-  }
+    public static function getPages(): array
+    {
+        return [
+            'index' => ListReservations::route('/'),
+            'create' => CreateReservation::route('/create'),
+            'edit' => EditReservation::route('/{record}/edit'),
+        ];
+    }
 }

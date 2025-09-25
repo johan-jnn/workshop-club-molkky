@@ -8,15 +8,15 @@ use Filament\Resources\Pages\CreateRecord;
 
 class CreateEvent extends CreateRecord
 {
-  protected static string $resource = EventResource::class;
+    protected static string $resource = EventResource::class;
 
-  protected function getCreatedNotification(): ?Notification
-  {
-    return Notification::make()
-      ->icon('heroicon-o-check-circle')
-      ->iconColor('success')
-      ->success()
-      ->title('Événement créé')
-      ->body("L'événement a été enregistré avec succès.");
-  }
+    protected function getCreatedNotification(): ?Notification
+    {
+        return Notification::make()
+            ->icon('heroicon-o-check-circle')
+            ->iconColor('success')
+            ->success()
+            ->title('Événement créé')
+            ->body("L'événement a été enregistré avec succès.");
+    }
 }
