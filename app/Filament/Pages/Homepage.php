@@ -49,7 +49,7 @@ class Homepage extends Page
                     FileUpload::make('hero_image')
                         ->label('Image')
                         ->image()
-                        ->directory('events')
+                        ->directory('homepage')
                         ->disk('public')
                         ->visibility('public'),
                 ]),
@@ -67,7 +67,7 @@ class Homepage extends Page
                                     FileUpload::make('image')
                                         ->label('Image')
                                         ->image()
-                                        ->directory('events')
+                                        ->directory('homepage')
                                         ->disk('public')
                                         ->visibility('public'),
                                 ]),
